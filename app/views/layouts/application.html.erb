@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MotorApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<nav id="nav">
+  <div id="page_nav">
+      <%= link_to " Home ", root_path %>
+      <%= link_to " About ", page_about_path %>
+      <%= link_to " FAQs ", page_faqs_path %>
+      <%= link_to " Contact Us ", page_contact_path %>
+  </div>
+  
+  <div id="seach-nav">
+    <form class ="searchbar-form " role="search">
+      <div class="form_group">
+        <input type="text" class="form_control" placeholder="Search">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </form>
+  </div>
+  
+  <div id="sign_in">
+    <!-- <p> Hello, <= current_user.username %> -->
+      <% if user_signed_in? %>
+        <%= link_to " Profile ", new_profile_path %>
+        <%= link_to " Sign Out ", destroy_user_session_path, method: :delete %>
+        
+      <% else %>
+        <%= link_to " Sign In ", new_user_session_path %>
+        <%= link_to " Sign Up ", new_user_registration_path %>
+      <% end %>
+  </div>
+</nav>
+
+  <div id="main_wrap">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      
+    <%= yield %>
+  </div>
+  
+</body>
+</html>

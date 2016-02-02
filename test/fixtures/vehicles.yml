@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  make: MyString
+  model: MyString
+  year: 2016-02-01
+  enginesize: 9.99
+  cupiccapacity: 1
+  price: 9.99
+  bodytype: MyString
+  fueltype: MyString
+  milleage: 1
+  transmission: MyString
+  taxdue: 2016-02-01
+  nctdue: 2016-02-01
+  platenumber: MyString
+  user_id: 1
+
+two:
+  description: MyText
+  make: MyString
+  model: MyString
+  year: 2016-02-01
+  enginesize: 9.99
+  cupiccapacity: 1
+  price: 9.99
+  bodytype: MyString
+  fueltype: MyString
+  milleage: 1
+  transmission: MyString
+  taxdue: 2016-02-01
+  nctdue: 2016-02-01
+  platenumber: MyString
+  user_id: 1

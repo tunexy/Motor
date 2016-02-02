@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @vehicle.description %>
+</p>
+
+<p>
+  <strong>Make:</strong>
+  <%= @vehicle.make %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @vehicle.model %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @vehicle.year %>
+</p>
+
+<p>
+  <strong>Enginesize:</strong>
+  <%= @vehicle.enginesize %>
+</p>
+
+<p>
+  <strong>Cupiccapacity:</strong>
+  <%= @vehicle.cupiccapacity %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @vehicle.price %>
+</p>
+
+<p>
+  <strong>Bodytype:</strong>
+  <%= @vehicle.bodytype %>
+</p>
+
+<p>
+  <strong>Fueltype:</strong>
+  <%= @vehicle.fueltype %>
+</p>
+
+<p>
+  <strong>Milleage:</strong>
+  <%= @vehicle.milleage %>
+</p>
+
+<p>
+  <strong>Transmission:</strong>
+  <%= @vehicle.transmission %>
+</p>
+
+<p>
+  <strong>Taxdue:</strong>
+  <%= @vehicle.taxdue %>
+</p>
+
+<p>
+  <strong>Nctdue:</strong>
+  <%= @vehicle.nctdue %>
+</p>
+
+<p>
+  <strong>Platenumber:</strong>
+  <%= @vehicle.platenumber %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @vehicle.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<%= link_to 'Back', vehicles_path %>
