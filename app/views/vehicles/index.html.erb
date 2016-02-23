@@ -1,10 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Vehicles</h1>
+<% if !user_signed_in? %>
+  <div class="jumbotron">
+    <h1>Listing Vehicles</h1>
+    <h1>Your Favorite Cars Posts</h1>
+    <p>This is some note to see if bootstrap works</p>
+    <p><%= link_to "Sign Up to Post A Comment", new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
+  </div>
+<% end %>
+
+<div class="row">
+  <% @vehicles.each do |vehicle| %>
+    <div class="col-sm-6, col-md-3">
+      <div class="thumbnail">
+      
+      </div>
+    </div>
+    <% end %>
+</div>
+
 
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Description</th>
       <th>Make</th>
       <th>Model</th>
@@ -27,6 +45,7 @@
   <tbody>
     <% @vehicles.each do |vehicle| %>
       <tr>
+        <td><%= image_tag vehicle.image.url(:medium) %></td>
         <td><%= vehicle.description %></td>
         <td><%= vehicle.make %></td>
         <td><%= vehicle.model %></td>
@@ -41,7 +60,7 @@
         <td><%= vehicle.taxdue %></td>
         <td><%= vehicle.nctdue %></td>
         <td><%= vehicle.platenumber %></td>
-        <td><%= vehicle.user_id %></td>
+        <td><%= vehicle.user.email %></td>
         <td><%= link_to 'Show', vehicle %></td>
         <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
         <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,5 +1,6 @@
 class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /vehicles
   # GET /vehicles.json
@@ -10,11 +11,14 @@ class VehiclesController < ApplicationController
   # GET /vehicles/1
   # GET /vehicles/1.json
   def show
+    @posts = Post.where(vehicle_id: @vehicle.id).order("created_at DESC")
   end
 
   # GET /vehicles/new
   def new
-    @vehicle = Vehicle.new
+    #@user = User.find(params[:user_id])
+    #@vehicle = @user.vehicles.build
+    @vehicle = current_user.vehicles.build
   end
 
   # GET /vehicles/1/edit
@@ -24,11 +28,15 @@ class VehiclesController < ApplicationController
   # POST /vehicles
   # POST /vehicles.json
   def create
-    @vehicle = Vehicle.new(vehicle_params)
+     #@user = User.find(params[:id])
+     #@vehicle = @user.vehicles.build(params[:vehicle])
+    @vehicle = current_user.vehicles.build(vehicle_params)
 
     respond_to do |format|
       if @vehicle.save
-        format.html { redirect_to @vehicle, notice: 'Vehicle was successfully created.' }
+        format.html { redirect_to @vehicle,
+        #new_vehicle_path(:id => @user.id), 
+        notice: 'Vehicle was successfully created.' }
         format.json { render :show, status: :created, location: @vehicle }
       else
         format.html { render :new }
@@ -40,6 +48,7 @@ class VehiclesController < ApplicationController
   # PATCH/PUT /vehicles/1
   # PATCH/PUT /vehicles/1.json
   def update
+
     respond_to do |format|
       if @vehicle.update(vehicle_params)
         format.html { redirect_to @vehicle, notice: 'Vehicle was successfully updated.' }
@@ -69,6 +78,6 @@ class VehiclesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vehicle_params
-      params.require(:vehicle).permit(:description, :make, :model, :year, :enginesize, :cupiccapacity, :price, :bodytype, :fueltype, :milleage, :transmission, :taxdue, :nctdue, :platenumber, :user_id)
+      params.require(:vehicle).permit(:image, :description, :make, :model, :year, :enginesize, :cupiccapacity, :price, :bodytype, :fueltype, :milleage, :transmission, :taxdue, :nctdue, :platenumber, :user_id)
     end
 end

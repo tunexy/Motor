@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /profiles
   # GET /profiles.json
@@ -14,17 +15,28 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
+    #@profile = Profile.new
     @profile = Profile.new
+      
   end
 
   # GET /profiles/1/edit
   def edit
   end
+  
+  def edit
+    
+  end
+  
+  def current_profile?
+    if current_user.profile.exists?
+    end
+  end
 
   # POST /profiles
   # POST /profiles.json
   def create
-    @profile = Profile.new(profile_params)
+    @profile = current_user.profiles.build(profile_params)
 
     respond_to do |format|
       if @profile.save
@@ -40,6 +52,8 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
+    @profile = current_user.profiles.build(vehicle_params)
+
     respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }

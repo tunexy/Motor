@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :comments
   root 'page#home'
 
   get 'page/about'
@@ -8,8 +9,10 @@ Rails.application.routes.draw do
 
   get 'page/contact'
 
-  resources :comments
-  resources :vehicles
+  resources :vehicles do
+      resources :posts, except: [:show, :index]
+    end
+
   resources :profiles
   devise_for :users
   
@@ -50,8 +53,7 @@ Rails.application.routes.draw do
 
   # Example resource route with more complex sub-resources:
   #   resources :products do
-  #     resources :comments
-  #     resources :sales do
+  #     #     resources :sales do
   #       get 'recent', on: :collection
   #     end
   #   end

@@ -1,79 +1,104 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @vehicle.description %>
-</p>
-
-<p>
-  <strong>Make:</strong>
-  <%= @vehicle.make %>
-</p>
-
-<p>
-  <strong>Model:</strong>
-  <%= @vehicle.model %>
-</p>
-
-<p>
-  <strong>Year:</strong>
-  <%= @vehicle.year %>
-</p>
-
-<p>
-  <strong>Enginesize:</strong>
-  <%= @vehicle.enginesize %>
-</p>
-
-<p>
-  <strong>Cupiccapacity:</strong>
-  <%= @vehicle.cupiccapacity %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @vehicle.price %>
-</p>
-
-<p>
-  <strong>Bodytype:</strong>
-  <%= @vehicle.bodytype %>
-</p>
-
-<p>
-  <strong>Fueltype:</strong>
-  <%= @vehicle.fueltype %>
-</p>
-
-<p>
-  <strong>Milleage:</strong>
-  <%= @vehicle.milleage %>
-</p>
-
-<p>
-  <strong>Transmission:</strong>
-  <%= @vehicle.transmission %>
-</p>
-
-<p>
-  <strong>Taxdue:</strong>
-  <%= @vehicle.taxdue %>
-</p>
-
-<p>
-  <strong>Nctdue:</strong>
-  <%= @vehicle.nctdue %>
-</p>
-
-<p>
-  <strong>Platenumber:</strong>
-  <%= @vehicle.platenumber %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @vehicle.user_id %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-3">
+        <%= image_tag @vehicle.image.url(:medium) %>
+      
+          <div class="table-reponsive">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td><strong>Description:</strong></td>
+                  <td><%= @vehicle.description %></td>
+                </tr>
+                <tr>
+                  <td><strong>Make:</strong></td>
+                  <td><%= @vehicle.make %></td>
+                </tr>
+                <tr>
+                  <td><strong>Model:</strong></td>
+                  <td><%= @vehicle.model %></td>
+                </tr>
+                <tr>
+                  <td><strong>Year:</strong></td>
+                  <td>  <%= @vehicle.year %></td>
+                </tr>
+                <tr>
+                  <td><strong>Enginesize:</strong></td>
+                  <td>  <%= @vehicle.enginesize %></td>
+                </tr>
+                <tr>
+                  <td><strong>Cupiccapacity:</strong></td>
+                  <td><%= @vehicle.cupiccapacity %></td>
+                </tr>
+                <tr>
+                  <td><strong>Price:</strong></td>
+                  <td><%= @vehicle.price %></td>
+                </tr>
+                <tr>
+                  <td><strong>Bodytype:</strong></td>
+                  <td><%= @vehicle.bodytype %></td>
+                </tr>
+                <tr>
+                  <td><strong>Fueltype:</strong></td>
+                  <td>  <%= @vehicle.fueltype %></td>
+                </tr>
+                <tr>
+                  <td>  <strong>Milleage:</strong></td>
+                  <td>  <%= @vehicle.milleage %></td>
+                </tr>
+                <tr>
+                  <td>  <strong>Transmission:</strong></td>
+                  <td>  <%= @vehicle.transmission %></td>
+                </tr>
+                <tr>
+                  <td>  <strong>Taxdue:</strong></td>
+                  <td>  <%= @vehicle.taxdue %></td>
+                </tr>
+                <tr>
+                  <td><strong>Nctdue:</strong></td>
+                  <td><%= @vehicle.nctdue %></td>
+                </tr>
+                <tr>
+                  <td><strong>User:</strong></td>
+                  <td><%= @vehicle.user.email %></td>
+                </tr>
+              </tbody>
+            </table>
+            <%= link_to "Post A Comment or Place an Offer", new_vehicle_post_path(@vehicle) %>
+        </div>
+      </div>
+      <div class="col-md-7 col-md-offset-1">
+        <h1 class="post_title"><%= @vehicle.make %></h1>
+        <p><%= @vehicle.user.email %></p>
+        
+        <% if @posts.blank? %>
+          <h3>No Comment just yet, Would you like to add the first Post</h3>
+          <%= link_to "Post Comment", new_vehicle_post_path(@vehicle), class: "btn btn-danger" %>
+        <% else %>
+          <%@posts.each do |post| %>
+            <div class="posts">
+              <div class="star-rating" data-score= <%= post.rating %> ></div>
+              <p><%= post.message %></p>
+              <p><%= post.offer %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
 <%= link_to 'Back', vehicles_path %>
+
+<script>
+  $('.star-ratng').raty({
+    path: '/assets/',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

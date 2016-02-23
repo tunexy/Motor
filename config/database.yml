@@ -27,7 +27,7 @@ development:
   database: Motor_app_development
   
 #  development:
-# adapter: mysql2
+#  adapter: mysql2
 #  encoding: utf8
 #  database: c9
 #  username: <%=ENV['C9_USER']%>

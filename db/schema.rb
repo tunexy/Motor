@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202123135) do
+ActiveRecord::Schema.define(version: 20160218173732) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "rating",     limit: 4
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20160202123135) do
     t.boolean  "offer"
     t.integer  "user_id",    limit: 4
     t.integer  "advert_id",  limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer  "rating",     limit: 4
+    t.text     "message",    limit: 65535
+    t.boolean  "offer"
+    t.integer  "user_id",    limit: 4
+    t.integer  "vehicle_id", limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -43,6 +53,8 @@ ActiveRecord::Schema.define(version: 20160202123135) do
     t.datetime "avatar_updated_at"
   end
 
+  add_index "profiles", ["user_id"], name: "user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -66,23 +78,31 @@ ActiveRecord::Schema.define(version: 20160202123135) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "vehicles", force: :cascade do |t|
-    t.text     "description",   limit: 65535
-    t.string   "make",          limit: 255
-    t.string   "model",         limit: 255
+    t.text     "description",        limit: 65535
+    t.string   "make",               limit: 255
+    t.string   "model",              limit: 255
     t.date     "year"
-    t.decimal  "enginesize",                  precision: 10
-    t.integer  "cupiccapacity", limit: 4
-    t.decimal  "price",                       precision: 10
-    t.string   "bodytype",      limit: 255
-    t.string   "fueltype",      limit: 255
-    t.integer  "milleage",      limit: 4
-    t.string   "transmission",  limit: 255
+    t.decimal  "enginesize",                       precision: 10
+    t.integer  "cupiccapacity",      limit: 4
+    t.decimal  "price",                            precision: 10
+    t.string   "bodytype",           limit: 255
+    t.string   "fueltype",           limit: 255
+    t.integer  "milleage",           limit: 4
+    t.string   "transmission",       limit: 255
     t.date     "taxdue"
     t.date     "nctdue"
-    t.string   "platenumber",   limit: 255
-    t.integer  "user_id",       limit: 4
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.string   "platenumber",        limit: 255
+    t.integer  "user_id",            limit: 4
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
   end
 
+  add_index "vehicles", ["user_id"], name: "user_id", using: :btree
+
+  add_foreign_key "profiles", "users", name: "profiles_ibfk_1"
+  add_foreign_key "vehicles", "users", name: "vehicles_ibfk_1"
 end
