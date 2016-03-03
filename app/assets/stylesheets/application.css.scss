@@ -16,9 +16,13 @@
  
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ 
+  .field_with_errors { @extend .has-error; }
+  .alert-notice { @extend .alert-info; }
+  .alert-alert { @extend .alert-danger; }
 
 body {
-  background: #AA4847;
+  background: #80BFFF;
 }
 *{
   margin: 0;
@@ -27,8 +31,8 @@ body {
 
 #nav{
   width: 100%;
-  height: 50px;
-  background: #000;
+  height: 60px;
+  background: #312312;
 }
 
 #page_nav a, #sign_in a, #seach-nav a{
@@ -50,12 +54,48 @@ body {
 }
 
 #sign_in{
-  margin: 0 5% 0 0;
+  margin: 0 9% 0 0;
   float: right;
 }
+
+.round-image-50 {
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    text-align: center;
+    img { width: 100% }
+}
+
 
 #main_wrap{
   width: 90%;
   float: left;
   margin: 20px 5% 0 5%;
+}
+
+.well{
+  backgroung-color: #EDEDED;
+}
+
+input,textarea,select, .uneditable-input {
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  width: 60%;
+  margin-bottom: 15px;
+}
+
+input{
+  height: auto !important;
+}
+
+.gravatar-panel{
+  margin-top: 10px;
+}
+.gravatar {
+  border-radius: 20px;
 }

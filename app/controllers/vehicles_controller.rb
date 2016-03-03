@@ -2,31 +2,24 @@ class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
-  # GET /vehicles
-  # GET /vehicles.json
   def index
     @vehicles = Vehicle.all
   end
 
-  # GET /vehicles/1
-  # GET /vehicles/1.json
   def show
     @posts = Post.where(vehicle_id: @vehicle.id).order("created_at DESC")
+    @vehicle = Vehicle.find(params[:id])
   end
 
-  # GET /vehicles/new
   def new
     #@user = User.find(params[:user_id])
     #@vehicle = @user.vehicles.build
     @vehicle = current_user.vehicles.build
   end
 
-  # GET /vehicles/1/edit
   def edit
   end
 
-  # POST /vehicles
-  # POST /vehicles.json
   def create
      #@user = User.find(params[:id])
      #@vehicle = @user.vehicles.build(params[:vehicle])
@@ -45,8 +38,6 @@ class VehiclesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /vehicles/1
-  # PATCH/PUT /vehicles/1.json
   def update
 
     respond_to do |format|
@@ -60,8 +51,6 @@ class VehiclesController < ApplicationController
     end
   end
 
-  # DELETE /vehicles/1
-  # DELETE /vehicles/1.json
   def destroy
     @vehicle.destroy
     respond_to do |format|

@@ -7,17 +7,26 @@
     <p><%= link_to "Sign Up to Post A Comment", new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
   </div>
 <% end %>
-
-<div class="row">
-  <% @vehicles.each do |vehicle| %>
-    <div class="col-sm-6, col-md-3">
+<hr/>
+<% @vehicles.each do |vehicle| %>
+  <div class="row">
+    <div class="col-xs-6 col-md-4 ">
       <div class="thumbnail">
-      
+        <h4>Seller:<%=vehicle.user.email %> Price <span class="label label-info"> <%= vehicle.price %></span></h4>
+        <%= image_tag vehicle.image.url(:medium), size: "250x200" %>
+        
+        <h3><%= link_to vehicle.platenumber, vehicle_path(vehicle) %></h3>
+        <div class="caption">
+        <h4>Key Info : <small><%= vehicle.make %> > <%= vehicle.model %></small></h4>
+        <h4>Year : <small><%= vehicle.year.year %></small></h4>
+        <p><a href="#" class="btn btn-warning" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p>
+          <span class='quiet'><small> <%= time_ago_in_words(vehicle.created_at)%> ago</small></span>
+        </p>
       </div>
     </div>
-    <% end %>
-</div>
-
+  </div>
+<% end %>
 
 <table>
   <thead>

@@ -3,85 +3,71 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-3">
+        <h4>Seller:<%= @vehicle.user.email %> Price <span class="label label-info"> <%= @vehicle.price %></span></h4>
         <%= image_tag @vehicle.image.url(:medium) %>
       
           <div class="table-reponsive">
             <table class="table">
               <tbody>
                 <tr>
-                  <td><strong>Description:</strong></td>
-                  <td><%= @vehicle.description %></td>
+                  <h3><small>Key Info :<b><%= @vehicle.make %> > <%= @vehicle.model %>, <%= @vehicle.year.year %></b></small></h3>
                 </tr>
                 <tr>
-                  <td><strong>Make:</strong></td>
-                  <td><%= @vehicle.make %></td>
+                  <td><small>ENGINE SIZE:</small></td>
+                  <td><b><%= @vehicle.enginesize %></b>litre</td>
+                  <td><small>CUPIC CAPACITY:</small></td>
+                  <td><b><%= @vehicle.cupiccapacity %></b></td>
                 </tr>
                 <tr>
-                  <td><strong>Model:</strong></td>
-                  <td><%= @vehicle.model %></td>
+                  <td><small>BODY TYPE:</small></td>
+                  <td><b><%= @vehicle.bodytype %></b></td>
+                   <td><small>FUEL TYPE:</small></td>
+                  <td><b><%= @vehicle.fueltype %></b></td>
                 </tr>
                 <tr>
-                  <td><strong>Year:</strong></td>
-                  <td>  <%= @vehicle.year %></td>
+                  <td><small>MILLEAGE:</small></td>
+                  <td><b><%= @vehicle.milleage %></b>KM</td>
+                  <td><small>TRANSMISSION:</small></td>
+                  <td><b><%= @vehicle.transmission %></b></td>
                 </tr>
                 <tr>
-                  <td><strong>Enginesize:</strong></td>
-                  <td>  <%= @vehicle.enginesize %></td>
-                </tr>
-                <tr>
-                  <td><strong>Cupiccapacity:</strong></td>
-                  <td><%= @vehicle.cupiccapacity %></td>
-                </tr>
-                <tr>
-                  <td><strong>Price:</strong></td>
-                  <td><%= @vehicle.price %></td>
-                </tr>
-                <tr>
-                  <td><strong>Bodytype:</strong></td>
-                  <td><%= @vehicle.bodytype %></td>
-                </tr>
-                <tr>
-                  <td><strong>Fueltype:</strong></td>
-                  <td>  <%= @vehicle.fueltype %></td>
-                </tr>
-                <tr>
-                  <td>  <strong>Milleage:</strong></td>
-                  <td>  <%= @vehicle.milleage %></td>
-                </tr>
-                <tr>
-                  <td>  <strong>Transmission:</strong></td>
-                  <td>  <%= @vehicle.transmission %></td>
-                </tr>
-                <tr>
-                  <td>  <strong>Taxdue:</strong></td>
-                  <td>  <%= @vehicle.taxdue %></td>
-                </tr>
-                <tr>
-                  <td><strong>Nctdue:</strong></td>
-                  <td><%= @vehicle.nctdue %></td>
-                </tr>
-                <tr>
-                  <td><strong>User:</strong></td>
-                  <td><%= @vehicle.user.email %></td>
+                  <td><small>NCT EXPIRY:</small></td>
+                  <td><b><%= @vehicle.nctdue %></b></td>
+                  <td></td><small>ROAD TAX:</small></td>
+                  <td><b><%= @vehicle.taxdue %></b></td>
                 </tr>
               </tbody>
             </table>
-            <%= link_to "Post A Comment or Place an Offer", new_vehicle_post_path(@vehicle) %>
-        </div>
+            <hr/>
+            <h4><strong>DESCRIPTION:</strong></h4>
+            <h3><%= simple_format(@vehicle.description) %></h3>
+          </div>
       </div>
-      <div class="col-md-7 col-md-offset-1">
-        <h1 class="post_title"><%= @vehicle.make %></h1>
-        <p><%= @vehicle.user.email %></p>
-        
+      
+      <div class="col-sm-6 pull-right center">
+        <h2 class="post_title"><%= link_to "Post A Comment or Place an Offer", new_vehicle_post_path(@vehicle), class: "btn btn-danger" %></h2>
+          
         <% if @posts.blank? %>
           <h3>No Comment just yet, Would you like to add the first Post</h3>
           <%= link_to "Post Comment", new_vehicle_post_path(@vehicle), class: "btn btn-danger" %>
         <% else %>
           <%@posts.each do |post| %>
-            <div class="posts">
-              <div class="star-rating" data-score= <%= post.rating %> ></div>
-              <p><%= post.message %></p>
-              <p><%= post.offer %></p>
+          <div class="row">
+            <div class="col-md-3 ">
+              <section class="gravatar-panel">
+                <%= gravatar_for @vehicle.user, size: 80 %>
+                <p>
+                  <i><small>Commenter: <%= @vehicle.user.email %></small></i>
+                </p>
+              </section>
+            </div>
+              <div class="col-md-9 well">
+                <p><h5><%= simple_format(post.message) %></h5></p>
+                <p><i>
+                  <span class='quiet'><small> <%= time_ago_in_words(post.created_at)%> ago</small></span>
+                </i></p>
+              </div>
+              <hr/>
             </div>
           <% end %>
         <% end %>
@@ -92,13 +78,3 @@
 
 <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
 <%= link_to 'Back', vehicles_path %>
-
-<script>
-  $('.star-ratng').raty({
-    path: '/assets/',
-    readOnly: true,
-    score: function() {
-      return $(this).attr('data-score');
-    }
-  });
-</script>
