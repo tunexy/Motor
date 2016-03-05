@@ -2,9 +2,24 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-6">
         <h4>Seller:<%= @vehicle.user.email %> Price <span class="label label-info"> <%= @vehicle.price %></span></h4>
         <%= image_tag @vehicle.image.url(:medium) %>
+        <ul>
+          <%= @vehicle.assets.size %>
+          <% for asset in @vehicle.assets %>
+            <%=link_to image_tag (asset.image.url(:thumb)) %>
+          <% end %>
+        </ul>
+        
+        <div class="pull-right">
+          <%= link_to like_vehicle_path(@vehicle, like: true), method: :post do %>
+            <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= @vehicle.thumbs_up_total %>
+          <% end %> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <%= link_to like_vehicle_path(@vehicle, like: false), method: :post do %>
+            <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= @vehicle.thumbs_down_total %>
+          <% end %>
+        </div>
       
           <div class="table-reponsive">
             <table class="table">
@@ -33,7 +48,7 @@
                 <tr>
                   <td><small>NCT EXPIRY:</small></td>
                   <td><b><%= @vehicle.nctdue %></b></td>
-                  <td></td><small>ROAD TAX:</small></td>
+                  <td><small>ROAD TAX:</small></td>
                   <td><b><%= @vehicle.taxdue %></b></td>
                 </tr>
               </tbody>
@@ -41,6 +56,7 @@
             <hr/>
             <h4><strong>DESCRIPTION:</strong></h4>
             <h3><%= simple_format(@vehicle.description) %></h3>
+            
           </div>
       </div>
       
@@ -61,7 +77,7 @@
                 </p>
               </section>
             </div>
-              <div class="col-md-9 well">
+              <div class="col-sm-9 well">
                 <p><h5><%= simple_format(post.message) %></h5></p>
                 <p><i>
                   <span class='quiet'><small> <%= time_ago_in_words(post.created_at)%> ago</small></span>

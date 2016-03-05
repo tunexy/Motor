@@ -1,12 +1,8 @@
 <p>
-  <h1>Advertise Your Vehicle</h1>
+  <h3>Advertise Your Vehicle</h3>
   <hr/>
 </p>
-
-<div class="row">
-  <div class="well col-md-8 col-md-offset-2">
-    
-<%= form_for @vehicle, html: { multipart: true } do |f| %>
+<%= form_for @vehicle, html: { multipart: true, method: :put, class: 'form-horizontal'  } do |f| %>
   <% if @vehicle.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
@@ -18,72 +14,146 @@
       </ul>
     </div>
   <% end %>
+  
 
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
-  </div>
-
-  <div class="field">
-    <%= f.label :make %><br>
-    <%= f.text_field :make %>
-  </div>
-  <div class="field">
-    <%= f.label :model %><br>
-    <%= f.text_field :model %>
-  </div>
-  <div class="field">
-    <%= f.label :year %><br>
-    <%= f.date_select :year, :start_year => 1970, :end_year => Date.current.year, :discard_month => true, :discard_day => true, :include_blank => true%>
-  </div>
-  <div class="field">
-    <%= f.label :enginesize %><br>
-    <%= f.text_field :enginesize %>
-  </div>
-  <div class="field">
-    <%= f.label :cupiccapacity %><br>
-    <%= f.number_field :cupiccapacity %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :bodytype %><br>
-    <%= f.text_field :bodytype %>
-  </div>
-  <div class="field">
-    <%= f.label :fueltype %><br>
-    <%= f.text_field :fueltype %>
-  </div>
-  <div class="field">
-    <%= f.label :milleage %><br>
-    <%= f.number_field :milleage %>
-  </div>
-  <div class="field">
-    <%= f.label :transmission %><br>
-    <%= f.text_field :transmission %>
-  </div>
-  <div class="field">
-    <%= f.label :taxdue %><br>
-    <%= f.date_select :taxdue, :start_year => 2013, :end_year => 2020, :discard_day => true, :include_blank => true%>
-  </div>
-  <div class="field">
-    <%= f.label :nctdue %><br>
-    <%= f.date_select :nctdue, :start_year => 2012, :end_year => 2018, :discard_day => true, :include_blank => true %>
-  </div>
-  <div class="field">
-    <%= f.label :platenumber %><br>
-    <%= f.text_field :platenumber %>
+  <div class="form-group">
+    <%= f.label :image, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-4">
+      <%= f.file_field :image %>
+    </div>
   </div>
   
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, rows: 5 %>
+
+  <div class="form-group">
+    <%= f.label :make, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.text_field :make, class: 'form-control'  %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  
+  <div class="form-group">
+    <%= f.label :model, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.text_field :model, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :year, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
+      <%= f.date_select :year, :start_year => 1970, 
+          :end_year => Date.current.year, :discard_month => true, 
+          :discard_day => true, :include_blank => true, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :enginesize, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.text_field :enginesize, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :cupiccapacity, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.number_field :cupiccapacity, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :price, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.text_field :price, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :bodytype, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.text_field :bodytype, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :fueltype, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.text_field :fueltype, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :milleage, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.number_field :milleage, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :transmission, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.text_field :transmission, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :taxdue, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-2">
+      <%= f.date_select :taxdue, :start_year => 2013, :end_year => 2020,
+            :discard_day => true, :include_blank => true, class: 'form-control' %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :nctdue, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
+      <%= f.date_select :nctdue, :start_year => 2012, :end_year => 2018, 
+          :discard_day => true, :include_blank => true, class: 'form-control' %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :platenumber, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+      <%= f.text_field :platenumber, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :description, class: 'col-sm-2 control-label'  %>
+      <div class="col-sm-6">
+      <%= f.text_area :description, rows: 5, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <h3>Vehicle Image Upload</h3>
+    <%= f.fields_for :assets do |asset_fields| %>
+    
+      <% if asset_fields.object.new_record? %>
+        <p>
+          <%= asset_fields.file_field :image %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class="form-group">
+    <h4>Vehicle Image</h4>
+    <%= f.fields_for :assets do |asset_fields| %>
+    
+      <% unless asset_fields.object.new_record? %>
+        <%= link_to image_tag(asset_fields.object.image.url(:thumb)),
+                    asset_fields.object.image.url(:original)%>
+                    <%= asset_fields.check_box :_destroy %>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit "Advertise Vehicle", class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>
-  </div>
-</div>
+

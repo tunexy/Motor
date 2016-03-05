@@ -1,4 +1,39 @@
 
+<%= will_paginate @vehicle_paginator %>
+
+<% @vehicles.each do |vehicle| %>
+  <div class="row">
+    <div class="col-xs-6 col-md-4 ">
+      <div class="thumbnail">
+        <h4>Seller:<%= vehicle.user.email %> Price <span class="label label-info"> <%= vehicle.price %></span></h4>
+        <%= image_tag vehicle.image.url(:medium), size: "250x300" %>
+        
+        <h3><%= link_to vehicle.platenumber, vehicle_path(vehicle) %></h3>
+        <div class="caption">
+          <h4>Key Info : <small><%= vehicle.make %> > <%= vehicle.model %></small></h4>
+          <h4>Year : <small><%= vehicle.year.year %></small></h4>
+          <p>
+            <a href="#" class="btn btn-warning" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a>
+          </p>
+          <p>
+            <span class='quiet'><small> created: <%= time_ago_in_words(vehicle.created_at)%> ago, </small></span>
+            <span class='quiet'><small> updated: <%= time_ago_in_words(vehicle.updated_at)%> ago</small></span>
+
+          </p>
+          <div class="pull-right">
+            <%= link_to like_vehicle_path(vehicle, like: true), method: :post do %>
+              <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= vehicle.thumbs_up_total %>
+            <% end %> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <%= link_to like_vehicle_path(vehicle, like: false), method: :post do %>
+              <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= vehicle.thumbs_down_total %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <% if !user_signed_in? %>
   <div class="jumbotron">
     <h1>Listing Vehicles</h1>
@@ -8,76 +43,7 @@
   </div>
 <% end %>
 <hr/>
-<% @vehicles.each do |vehicle| %>
-  <div class="row">
-    <div class="col-xs-6 col-md-4 ">
-      <div class="thumbnail">
-        <h4>Seller:<%=vehicle.user.email %> Price <span class="label label-info"> <%= vehicle.price %></span></h4>
-        <%= image_tag vehicle.image.url(:medium), size: "250x200" %>
-        
-        <h3><%= link_to vehicle.platenumber, vehicle_path(vehicle) %></h3>
-        <div class="caption">
-        <h4>Key Info : <small><%= vehicle.make %> > <%= vehicle.model %></small></h4>
-        <h4>Year : <small><%= vehicle.year.year %></small></h4>
-        <p><a href="#" class="btn btn-warning" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-        <p>
-          <span class='quiet'><small> <%= time_ago_in_words(vehicle.created_at)%> ago</small></span>
-        </p>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Description</th>
-      <th>Make</th>
-      <th>Model</th>
-      <th>Year</th>
-      <th>Enginesize</th>
-      <th>Cupiccapacity</th>
-      <th>Price</th>
-      <th>Bodytype</th>
-      <th>Fueltype</th>
-      <th>Milleage</th>
-      <th>Transmission</th>
-      <th>Taxdue</th>
-      <th>Nctdue</th>
-      <th>Platenumber</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @vehicles.each do |vehicle| %>
-      <tr>
-        <td><%= image_tag vehicle.image.url(:medium) %></td>
-        <td><%= vehicle.description %></td>
-        <td><%= vehicle.make %></td>
-        <td><%= vehicle.model %></td>
-        <td><%= vehicle.year %></td>
-        <td><%= vehicle.enginesize %></td>
-        <td><%= vehicle.cupiccapacity %></td>
-        <td><%= vehicle.price %></td>
-        <td><%= vehicle.bodytype %></td>
-        <td><%= vehicle.fueltype %></td>
-        <td><%= vehicle.milleage %></td>
-        <td><%= vehicle.transmission %></td>
-        <td><%= vehicle.taxdue %></td>
-        <td><%= vehicle.nctdue %></td>
-        <td><%= vehicle.platenumber %></td>
-        <td><%= vehicle.user.email %></td>
-        <td><%= link_to 'Show', vehicle %></td>
-        <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
-        <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Vehicle', new_vehicle_path %>
+
+<%= will_paginate %>

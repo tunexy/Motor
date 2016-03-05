@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303172152) do
+ActiveRecord::Schema.define(version: 20160305121848) do
+
+  create_table "assets", force: :cascade do |t|
+    t.integer  "vehicle_id",         limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+  end
+
+  add_index "assets", ["vehicle_id"], name: "index_assets_on_vehicle_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.integer  "rating",     limit: 4
@@ -21,6 +33,14 @@ ActiveRecord::Schema.define(version: 20160303172152) do
     t.integer  "advert_id",  limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.boolean  "like"
+    t.integer  "user_id",    limit: 4
+    t.integer  "vehicle_id", limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -117,6 +137,7 @@ ActiveRecord::Schema.define(version: 20160303172152) do
 
   add_index "vehicles", ["user_id"], name: "user_id", using: :btree
 
+  add_foreign_key "assets", "vehicles"
   add_foreign_key "profiles", "users", name: "profiles_ibfk_1"
   add_foreign_key "vehicles", "users", name: "vehicles_ibfk_1"
 end

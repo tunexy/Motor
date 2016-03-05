@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  resources :comments
   root 'page#home'
 
   get 'page/about'
@@ -10,12 +9,14 @@ Rails.application.routes.draw do
   get 'page/contact'
 
   resources :vehicles do
-      resources :posts, except: [:show, :index]
+    resources :posts, except: [:show, :index]
+    member do
+      post 'like'
     end
+  end
 
-  resources :profiles
   devise_for :users
-  
+end
   #controllers: { registrations: "registrations" }
   
   # The priority is based upon order of creation: first created -> highest priority.
@@ -71,4 +72,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
+

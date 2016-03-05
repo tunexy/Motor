@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
          
   has_many :vehicles
+  has_many :likes
   has_many :posts, dependent: :delete_all
   
   before_save { self.email = email.downcase }
