@@ -1,10 +1,9 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
+  before_action :set_vehicle, only: [:show, :edit, :update, :destroy, :like]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @vehicles = Vehicle.paginate(page: params[:page], per_page: 6)
-    #@vehicles = Vehicle.all.sort_by{|likes| likes.thumbs_up_total}.reverse
   end
 
   def show
@@ -13,8 +12,6 @@ class VehiclesController < ApplicationController
   end
 
   def new
-    #@user = User.find(params[:user_id])
-    #@vehicle = @user.vehicles.build
     @vehicle = current_user.vehicles.build
     10.times {@vehicle.assets.build}
   end
@@ -24,13 +21,10 @@ class VehiclesController < ApplicationController
   end
 
   def create
-     #@user = User.find(params[:id])
-     #@vehicle = @user.vehicles.build(params[:vehicle])
     @vehicle = current_user.vehicles.build(vehicle_params)
     respond_to do |format|
       if @vehicle.save
         format.html { redirect_to @vehicle,
-        #new_vehicle_path(:id => @user.id), 
         notice: 'Vehicle was successfully created.' }
         format.json { render :show, status: :created, location: @vehicle }
       else
@@ -62,8 +56,7 @@ class VehiclesController < ApplicationController
   end
   
   def like
-    @vehicle = Vehicle.find(params[:id])
-    like = Like.create(like: params[:like], user: User.first, vehicle: @vehicle)
+    like = Like.create(like: params[:like], user: current_user, vehicle: @vehicle)
     if like.valid?
       redirect_to :back, notice: "You like this advert "
     else

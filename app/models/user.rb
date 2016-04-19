@@ -8,6 +8,13 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :posts, dependent: :delete_all
   
+  has_many :posts, dependent: :destroy
+  has_many :sent_invites, class_name: "Relationship", foreign_key: :inviting_id
+  has_many :received_invites, class_name: "Relationship", foreign_key: :invited_id
+  
+  has_many :invited_users, through: :sent_invites, source: :invited_user
+  has_many :inviting_users, through: :received_invites, source: :inviting_user
+  
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 105 },
@@ -32,4 +39,54 @@ class User < ActiveRecord::Base
       errors[:dateofbirth] << "Date Of Birth  Can not be a date in the future"
     end
   end
+  
+  def user_name
+    username.blank? ? email : username
+  end
+  
+  def employed
+    employmentstatus.blank? ? 20 : 4
+  end
+  
+  def family_status
+    if martialstatus == 'Single'
+      @family = 30
+    elsif
+      martialstatus == 'Married'
+      @family = 10
+    elsif
+      martialstatus == 'Divorced'
+      @family = 18
+    else
+      @family = 15
+    end
+    @family
+  end
+  
+  def user_age
+    if dateofbirth <= 25.years.ago
+      @mature = 50
+    elsif
+      dateofbirth <= 33.years.ago
+      @mature = 20
+    elsif
+      dateofbirth <= 49.years.ago
+      @mature = 15
+    else
+      @mature = 5
+    end
+    @mature
+  end
+  
+  def user_sex
+    is_female.blank? ? 30 : 10
+  end
+  
+  def cal_person_risk(user)
+    #@user = User.find(current_user.id)
+    @user = user
+    @user_risk = @user.user_age * @user.user_sex * @user.family_status
+    @user_risk
+  end
+  
 end
