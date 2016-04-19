@@ -4,6 +4,8 @@ gem 'aws-sdk', '>= 2.0.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'paperclip', "~> 4.3"
 ruby '2.2.1'
+
+gem 'puma'
 gem 'devise'
 gem 'will_paginate', '~>3.0.7'
 gem 'bootstrap-will_paginate', '~>0.0.10'
