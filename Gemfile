@@ -3,10 +3,12 @@ source 'https://rubygems.org'
 gem 'aws-sdk', '>= 2.0.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'paperclip', "~> 4.3"
+ruby '2.2.1'
 gem 'devise'
 gem 'will_paginate', '~>3.0.7'
 gem 'bootstrap-will_paginate', '~>0.0.10'
 gem 'pry'
+gem 'pry-doc'
 gem 'pry-remote'
 gem 'pry-stack_explorer'
 #gem 'pry-debugger'
@@ -14,7 +16,7 @@ gem 'pry-rails', :group => :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.3.20'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -41,6 +43,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+group :development, :test do
+  gem 'mysql2', '~> 0.3.20'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

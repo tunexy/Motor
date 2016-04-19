@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'page/faqs'
 
   get 'page/contact'
+  
+  resources :relationships, only: [:create, :destroy, :index]
 
   resources :vehicles do
     resources :posts, except: [:show, :index]
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+    resources :users, only: [:index, :show]
+    
 end
   #controllers: { registrations: "registrations" }
   

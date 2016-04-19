@@ -1,2 +1,16 @@
-<h1>Page#home</h1>
-<p>Find me in app/views/page/home.html.erb</p>
+<div class="container">
+  <div class="vehicles row">
+    <%= will_paginate (@vehicles) %>
+    <% @vehicles.each do |vehicle| %>
+      <div class="panel panel-default">
+        <%= link_to vehicle_path(vehicle) do %>
+          <div class="panel-body">
+            <%= image_tag(vehicle.image.url(:medium)) %>
+            <p><%= vehicle.make %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <%= will_paginate (@vehicles) %>
+    </div>
+</div>

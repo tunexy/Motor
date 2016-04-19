@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-xs-6 col-md-4 ">
       <div class="thumbnail">
-        <h4>Seller:<%= vehicle.user.email %> Price <span class="label label-info"> <%= vehicle.price %></span></h4>
+        <h4>Seller:<%= vehicle.user.firstname %> &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp Price <span class="label label-info"> <%= vehicle.price %></span></h4>
         <%= image_tag vehicle.image.url(:medium), size: "250x300" %>
         
         <h3><%= link_to vehicle.platenumber, vehicle_path(vehicle) %></h3>
@@ -27,6 +27,9 @@
             <%= link_to like_vehicle_path(vehicle, like: false), method: :post do %>
               <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= vehicle.thumbs_down_total %>
             <% end %>
+            <%= link_to 'Show', vehicle %>
+            <%= link_to 'Edit', edit_vehicle_path(vehicle) %>
+            <%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %>
           </div>
         </div>
       </div>

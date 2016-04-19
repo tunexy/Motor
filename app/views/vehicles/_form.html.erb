@@ -15,19 +15,21 @@
     </div>
   <% end %>
   
-
   <div class="form-group">
     <%= f.label :image, class: 'col-sm-2 control-label'  %>
     <div class="col-sm-4">
       <%= f.file_field :image %>
     </div>
   </div>
-  
 
   <div class="form-group">
     <%= f.label :make, class: 'col-sm-2 control-label'  %>
     <div class="col-sm-6">
-      <%= f.text_field :make, class: 'form-control'  %>
+      <%= f.select :make, ['Acura', 'Alfa Romeo', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 
+            'Cadillac', ' Chevrolet', 'Citroen', 'Dodge', 'Ferrari', 'Fiat', 'Ford', 'General Motors',
+            'Honda', 'Hyundai', 'Jaguar', 'Jeep', 'Kia', 'Land Rover', 'Lexus', 'Mazda', 'Mercedes Benz',
+            'Mini', 'Mitsubishi', 'Nissan', 'Peugeot', 'Renault', 'Saab', 'Subaru', 'Suzuki', 'Toyota',
+            'Volkswagen', 'Volvo'], class: 'form-control'  %>
     </div>
   </div>
   
@@ -50,14 +52,17 @@
   <div class="form-group">
     <%= f.label :enginesize, class: 'col-sm-2 control-label'  %>
     <div class="col-sm-6">
-      <%= f.text_field :enginesize, class: 'form-control'  %>
+      <%= f.select :enginesize, ['1.0','1.2','1.4','1.6','1.8',
+            '2.0','2.2','2.4','2.6','2.8','3.0','3.2','3.4','3.6','3.8',
+            '4.0','4.2','4.4','4.6','4.8','5.0','5.2','5.4','5.6','5.8',
+            '6.0','7.2','7.4','7.6','7.8','8.0'], class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
     <%= f.label :cupiccapacity, class: 'col-sm-2 control-label'  %>
     <div class="col-sm-6">
-      <%= f.number_field :cupiccapacity, class: 'form-control'  %>
+      <%= f.select :cupiccapacity, ['2','4','5','8','9','12','20'], class: 'form-control'  %>
     </div>
   </div>
   
@@ -71,14 +76,15 @@
   <div class="form-group">
     <%= f.label :bodytype, class: 'col-sm-2 control-label'  %>
     <div class="col-sm-6">
-      <%= f.text_field :bodytype, class: 'form-control'  %>
+      <%= f.select :bodytype, ['Sedan','Coupe','Convertible','Minivan','Truck','SUV',
+      'Collector','Ecofriendly','Pickup','Wagon','Hatchback','Van','Offroad'], class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
     <%= f.label :fueltype, class: 'col-sm-2 control-label'  %>
     <div class="col-sm-6">
-      <%= f.text_field :fueltype, class: 'form-control'  %>
+      <%= f.select :fueltype, ['Petrol','Diesel','Hybrid'], class: 'form-control'  %>
     </div>
   </div>
   
@@ -92,7 +98,7 @@
   <div class="form-group">
     <%= f.label :transmission, class: 'col-sm-2 control-label'  %>
     <div class="col-sm-6">
-      <%= f.text_field :transmission, class: 'form-control'  %>
+      <%= f.select :transmission, ['Manual','Automatic'], class: 'form-control'  %>
     </div>
   </div>
   
@@ -143,8 +149,7 @@
     <%= f.fields_for :assets do |asset_fields| %>
     
       <% unless asset_fields.object.new_record? %>
-        <%= link_to image_tag(asset_fields.object.image.url(:thumb)),
-                    asset_fields.object.image.url(:original)%>
+        <%= link_to image_tag(asset_fields.object.image.url(:thumb)) %>
                     <%= asset_fields.check_box :_destroy %>
       <% end %>
     <% end %>

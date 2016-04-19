@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305121848) do
+ActiveRecord::Schema.define(version: 20160413142751) do
 
   create_table "assets", force: :cascade do |t|
     t.integer  "vehicle_id",         limit: 4
@@ -24,16 +24,6 @@ ActiveRecord::Schema.define(version: 20160305121848) do
   end
 
   add_index "assets", ["vehicle_id"], name: "index_assets_on_vehicle_id", using: :btree
-
-  create_table "comments", force: :cascade do |t|
-    t.integer  "rating",     limit: 4
-    t.text     "message",    limit: 65535
-    t.boolean  "offer"
-    t.integer  "user_id",    limit: 4
-    t.integer  "advert_id",  limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
 
   create_table "likes", force: :cascade do |t|
     t.boolean  "like"
@@ -53,27 +43,12 @@ ActiveRecord::Schema.define(version: 20160305121848) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.string   "title",               limit: 255
-    t.string   "firstname",           limit: 255
-    t.string   "lastname",            limit: 255
-    t.date     "dateofbirth"
-    t.string   "martialstatus",       limit: 255
-    t.string   "phonenumber",         limit: 255
-    t.string   "employmentstatus",    limit: 255
-    t.text     "address",             limit: 65535
-    t.string   "city",                limit: 255
-    t.string   "country",             limit: 255
-    t.integer  "user_id",             limit: 4
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.string   "avatar_file_name",    limit: 255
-    t.string   "avatar_content_type", limit: 255
-    t.integer  "avatar_file_size",    limit: 4
-    t.datetime "avatar_updated_at"
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "inviting_id", limit: 4
+    t.integer  "invited_id",  limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
-
-  add_index "profiles", ["user_id"], name: "user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "",    null: false
@@ -138,6 +113,5 @@ ActiveRecord::Schema.define(version: 20160305121848) do
   add_index "vehicles", ["user_id"], name: "user_id", using: :btree
 
   add_foreign_key "assets", "vehicles"
-  add_foreign_key "profiles", "users", name: "profiles_ibfk_1"
   add_foreign_key "vehicles", "users", name: "vehicles_ibfk_1"
 end
