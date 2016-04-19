@@ -1,0 +1,24 @@
+<h1>Connected users</h1>
+
+  <% if @sent_invites.any? %>
+    <h3>Invited user</h3>
+    <% @sent_invites %>
+    <ul>
+      <% @sent_invites.each do |invitation| %>
+        <button><h4><li><%= link_to invitation.invited_user.user_name, 
+        user_path(invitation.invited_user) %></li></h4></button>
+      <% end %>
+    </ul>
+    <% @sent_invites %>
+  <% end %>
+
+  <% if @received_invites.any? %>
+    <h3>Invitations received</h3>
+    <%= @received_invites %>
+    <ul>
+      <% @received_invites.each do |invitation| %>
+        <li><%= link_to invitation.invited_user.user_name, user_path(invitation.invited_user) %></li>
+      <% end %>
+    </ul>
+    <%= @received_invites %>
+  <% end %>

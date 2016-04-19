@@ -1,0 +1,60 @@
+<div class="row profile">
+  <div class="col-sm-4 col-md-3">
+    <%= image_tag(@user.avatar.url(:medium), class: 'avatar') %>
+    <h1><%= @user.user_name %></h1>
+    
+    <% if current_user %>
+      <% @relationship = current_user.sent_invites.where(invited_id: @user.id).first %>
+
+      <% if @relationship %>
+        <%= link_to "Stop following", @relationship, method: :delete %>
+      <% else %>
+        <%= form_for :relationship, url: relationships_path, html: { method: :post } do |f| %>
+          <%= f.hidden_field :invited_id, value: @user.id %>
+          <%= f.submit 'Follow', class: 'btn btn-primary' %>
+        <% end %>
+      <% end %>
+    <% end %>
+    
+    <ul>
+      <%= content_tag(:li, ("Username : " + @user.username)) unless @user.username.blank? %>
+      <%= content_tag(:li, ("Firstname : " + @user.firstname)) unless @user.firstname.blank? %>
+      <%= content_tag(:li, ("Surname : " + @user.lastname)) unless @user.lastname.blank? %>
+      <%= content_tag(:li, ("Sex : " + @user.is_female)) unless @user.is_female.blank? %>
+      <%= content_tag(:li, ("Age : " + distance_of_time_in_words(Time.now, 
+                  @user.dateofbirth) + " old")) unless @user.dateofbirth.blank? %>
+      <%= content_tag(:li, ("Mobile Number : " + @user.phonenumber)) unless @user.phonenumber.blank? %>
+      <%= content_tag(:li, ("Employment Status : " + @user.employmentstatus)) unless @user.employmentstatus.blank? %>
+      <%= content_tag(:li, ("Martial Status : " + @user.martialstatus)) unless @user.martialstatus.blank? %>
+      <%= content_tag(:li, ("Address : " + @user.address)) unless @user.address.blank? %>
+      <%= content_tag(:li, ("City : " + @user.city)) unless @user.city.blank? %>
+      <h3><%= @user.cal_person_risk(@user) %></h3>
+      <h3><%= @user.user_age %></h3>
+      <h4><%= @user.dateofbirth %></h4>
+      
+       <% if @user.dateofbirth <= 25.years.ago %>
+       <%= @user.dateofbirth %>
+       <%= 25.years.ago %>
+       <p>over 25</p>
+       
+       <% elsif @user.dateofbirth <= Time.now-33.years.ago%>
+        <p>over 33</p>
+       <%end%>
+      <h3><%= @user.user_sex %></h3>
+            <h4><%= @user.is_female %></h4>
+      <h3><%= @user.family_status %></h3>
+            <h4><%= @user.martialstatus %></h4>
+      <h3><%= @user.employed %></h3>
+      <h4><%= @user.employmentstatus %></h4>
+
+    </ul>
+  </div>
+  <div class="feed">
+    <h3>Social Feed Coming</h3>
+    <p>Put a couple of lines of text here and see how it scrolls
+    fasnflfdnn nlkvsndvnzfni nvsnaovn  klgral dbJEFB fvvs faaf ff 
+    fsbxvvzhd ffbfs v v resr rhvr evrrvvr vaer vr r vres hbsvdvyi 
+    sadbhbvfdkf af rarh vfvr afffrasjbfurrfs rrfaebrb rafrfsburifa 
+    frasjbrfa raf jehv rar rrfahrarbfbreiu rbrira rabarurarb</p>
+  </div>
+</div>
