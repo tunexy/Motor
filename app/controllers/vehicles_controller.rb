@@ -1,5 +1,5 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_vehicle, only: [:show, :edit, :update, :destroy, :like, :image_url]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -18,6 +18,11 @@ class VehiclesController < ApplicationController
 
   def edit
     10.times {@vehicle.assets.build}
+  end
+  
+  def image_url
+    Image.find( self.image ).url
+    Asset.find(self.default_image_id).image.url
   end
 
   def create

@@ -4,11 +4,9 @@ class Vehicle < ActiveRecord::Base
   has_many :assets
   has_many :posts, dependent: :delete_all
   
-  #attr_accessible :make, :year, :enginesize, :price
-  
   accepts_nested_attributes_for :assets, allow_destroy: true
   
-  has_attached_file :image, styles: { large: "450x350>", medium: "350x400>", 
+  has_attached_file :image, styles: { large: "450x450>", medium: "350x300>", 
                                       thumb: "100x100#" }, default_url: "/images/style/quePic.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   
