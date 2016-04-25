@@ -17,9 +17,9 @@ class User < ActiveRecord::Base
   
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 105 },
-                                    uniqueness: { case_sensitive: false },
-                                    format: { with: VALID_EMAIL_REGEX }
+  #validates :email, presence: true, length: { maximum: 105 },
+                                    #uniqueness: { case_sensitive: false },
+                                    #format: { with: VALID_EMAIL_REGEX }
                                     
   has_attached_file :avatar, styles: { large: "700x600>", medium: "300x300>", thumb: "100x100#" }, 
   default_url: "/images/:style/download.jpeg"
@@ -64,13 +64,13 @@ class User < ActiveRecord::Base
   end
   
   def user_age
-    if dateofbirth <= 25.years.ago
-      @mature = 50
+    if dateofbirth && Date.today < 25.years.ago
+      @mature = 60
     elsif
-      dateofbirth <= 33.years.ago
+      dateofbirth && Date.today < 33.years.ago
       @mature = 20
     elsif
-      dateofbirth <= 49.years.ago
+      dateofbirth && Date.today < 49.years.ago
       @mature = 15
     else
       @mature = 5
@@ -88,5 +88,6 @@ class User < ActiveRecord::Base
     @user_risk = @user.user_age * @user.user_sex * @user.family_status
     @user_risk
   end
+  
   
 end

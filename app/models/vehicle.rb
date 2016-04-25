@@ -38,9 +38,6 @@ class Vehicle < ActiveRecord::Base
     self.likes.where(like: false).size
   end
   
-  
-    
-
   def make_level
     if make == 'Audi' || make == 'BMW'
      @risk = 60
@@ -116,12 +113,12 @@ class Vehicle < ActiveRecord::Base
   def cal_premium(vehicle)
     @vehicle=vehicle
     @prem = @vehicle.make_level * @vehicle.car_old * @vehicle.car_engine * @vehicle.check_price / 100
-    @prem
+    @prem 
   end
   
-  
+  def risk_premium
+    #@risk = cal_premium(@vehicle) * cal_person_risk(@user) / 100
+    #@risk
+  end
 
-  # attr_accessible :framework, :name, :images_attributes
-  # has_many :images, class_name: 'ProjectImage', dependent: :destroy
-  # accepts_nested_attributes_for :images
 end

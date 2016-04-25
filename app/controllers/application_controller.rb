@@ -16,13 +16,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def risk_premium(vehicle, user)
-    @user = current_user
-    @vehicle = vehicle
-    @risk = @vehicle.cal_premium(@vehicle) * @user.cal_person_risk(@user) / 100
-    @risk
-  end
-
   protected
 
     def configure_permitted_parameters

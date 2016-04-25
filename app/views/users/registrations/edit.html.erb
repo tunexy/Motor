@@ -11,6 +11,13 @@
   </div>
   
   <div class="form-group">
+    <%= f.label :email, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-4">
+      <%= f.email_field :email, autofocus: true, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
     <%= f.label :username, class: 'col-sm-2 control-label'   %>
     <div class="col-sm-4">
       <%= f.text_field :username, autofocus: true, class: 'form-control'  %>
@@ -34,7 +41,7 @@
   <div class="form-group">
     <%= f.label :martialstatus, class: 'col-sm-2 control-label'   %>
     <div class="col-sm-4">
-      <%= f.text_field :martialstatus, autofocus: true, class: 'form-control'  %>
+      <%= f.select :martialstatus, ['Single','Married','Widow', 'Widower', 'Divorced'], autofocus: true, class: 'form-control'  %>
     </div>
   </div>
 
@@ -78,13 +85,6 @@
     <%= f.label :dateofbirth, class: 'col-sm-2 control-label'%>
     <div class=" col-sm-2">
         <%= f.date_select :dateofbirth, :start_year => 1800, :end_year => 2000, class: 'form-control' %>
-    </div>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :email, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-4">
-      <%= f.email_field :email, autofocus: true, class: 'form-control'  %>
     </div>
   </div>
 

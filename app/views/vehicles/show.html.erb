@@ -9,56 +9,7 @@
         <h4>Seller :&nbsp<%= @vehicle.user.firstname %> &nbsp&nbsp&nbsp 
         Price <span class="label label-info"> <%= @vehicle.price %></span></h4>
        
-        <%= image_tag @vehicle.image.url(:medium) %>
-        <div class="col-sm-4 row-sm-5">
-        <ul>
-          
-        </ul>
-        </div>
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-          <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-            <head>
-           <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-           <title>JavaScript</title>
-           <style>
-          
-               #h3style {
-                   color: gray;
-               }
-           </style>
-            </head>
-            <div="pic_mut">
-        <%= @vehicle.assets.size %>
-          <% for asset in @vehicle.assets %>
-            <%=link_to image_tag (asset.image.url(:thumb)), size: "60x80"%>
-          <% end %>
-          
-          
-         <body onResize="changeImage();" onLoad="alert('Website Loaded');">
-          <script language="javascript" type="text/javascript">
-          if(document.getElementById("asset")) {
-            //Do something...
-              }
-              $(document.body).on('click',function(e){
-                if(!$(e.target).closest('#main-space').length){
-                    $('#main-space').hide();
-                }
-            });
-           function alertme()
-           {
-             alertmsg = document.asset.src + "\nHeight: " + document.asset.height + "\nWidth: " + document.asset.width;
-             alert(alertmsg);
-             return true;
-           }
-               </script>
-               <noscript>
-               <h3>This site requires JavaScript</h3>
-              </noscript>
-
-               </div>
-        </body>
-      </html>
+        <div class="main-image-to-change" style="background-image:url(<%=@vehicle.image.url %>); height:300px; width:100%;"></div>
         
         <div class="pull-right">
           <%= link_to like_vehicle_path(@vehicle, like: true), method: :post do %>
@@ -108,8 +59,7 @@
             <h3><%= @vehicle.car_old %></h3>
             <h3><%= @vehicle.car_engine %></h3>
             <h3><%= @vehicle.check_price %></h3>
-            <h3><%= @vehicle.cal_premium(@vehicle) %></h3>
-
+          <%= link_to "Premium", payment_path, class: "btn btn-danger" %>
           </div>
       </div>
       

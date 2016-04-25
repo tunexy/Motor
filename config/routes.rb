@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   
   resources :relationships, only: [:create, :destroy, :index]
 
+  resources :payments, only: [:show]
+
   resources :vehicles do
     resources :posts, except: [:show, :index]
     member do
