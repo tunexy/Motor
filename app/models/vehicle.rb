@@ -10,7 +10,7 @@ class Vehicle < ActiveRecord::Base
                                       thumb: "100x100#" }, default_url: "/images/style/quePic.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   
-  validates :user_id, presence: true
+  #validates :user_id, presence: true
 
   validates :make, :model, :year, :enginesize, :fueltype, :cupiccapacity, 
   :bodytype, :milleage, :transmission, :platenumber, presence: true

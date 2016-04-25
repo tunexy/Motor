@@ -10,7 +10,23 @@
         Price <span class="label label-info"> <%= @vehicle.price %></span></h4>
        
         <div class="main-image-to-change" style="background-image:url(<%=@vehicle.image.url %>); height:300px; width:100%;"></div>
-        
+          <div class="col-sm-12">
+          <% for asset in @vehicle.assets %>
+          <div class="col-sm-3">
+            <%= image_tag (asset.image.url), size: "60x80", class:"pickable-image"%>
+            </div>
+            
+            <script type="text/javascript">
+            jQuery(document).ready(function(){
+              $(".pickable-image").click(function(){
+                $imageLinktoChange = $(this).attr('src');
+               
+                $(".main-image-to-change").css({"background-image":"url("+$imageLinktoChange+")"});
+              });
+            });
+            </script>
+          <% end %>
+        </div>
         <div class="pull-right">
           <%= link_to like_vehicle_path(@vehicle, like: true), method: :post do %>
             <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= @vehicle.thumbs_up_total %>
@@ -55,17 +71,13 @@
             <hr/>
             <h4><strong>DESCRIPTION:</strong></h4>
             <h3><%= simple_format(@vehicle.description) %></h3>
-            <h3><%= @vehicle.make_level %></h3>
-            <h3><%= @vehicle.car_old %></h3>
-            <h3><%= @vehicle.car_engine %></h3>
-            <h3><%= @vehicle.check_price %></h3>
+
           <%= link_to "Premium", payment_path, class: "btn btn-danger" %>
           </div>
       </div>
       
       <div class="col-sm-6 pull-right center">
-        <h2 class="post_title"><%= link_to "Post A Comment or Place an Offer", 
-              new_vehicle_post_path(@vehicle), class: "btn btn-danger" %></h2>
+        
           
         <% if @posts.blank? %>
           <h3>No Comment just yet, Would you like to add the first Post</h3>

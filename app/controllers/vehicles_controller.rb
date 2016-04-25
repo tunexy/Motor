@@ -40,7 +40,6 @@ class VehiclesController < ApplicationController
   end
 
   def update
-
     respond_to do |format|
       if @vehicle.update(vehicle_params)
         format.html { redirect_to @vehicle, notice: 'Vehicle was successfully updated.' }
