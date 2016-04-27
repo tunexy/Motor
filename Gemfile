@@ -6,6 +6,7 @@ gem 'paperclip', "~> 4.3"
 ruby '2.2.1'
 
 # gem 'puma'
+gem 'geocoder'
 gem 'devise'
 gem 'will_paginate', '~>3.0.7'
 gem 'bootstrap-will_paginate', '~>0.0.10'

@@ -10,7 +10,7 @@ class Vehicle < ActiveRecord::Base
                                       thumb: "100x100#" }, default_url: "/images/style/quePic.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   
-  #validates :user_id, presence: true
+  validates :user_id, presence: true
 
   validates :make, :model, :year, :enginesize, :fueltype, :cupiccapacity, 
   :bodytype, :milleage, :transmission, :platenumber, presence: true
@@ -39,31 +39,37 @@ class Vehicle < ActiveRecord::Base
   end
   
   def make_level
-    if make == 'Audi' || make == 'BMW'
+    if make == 'Audi' || make == 'BMW' || make == 'Cadillac' || make == 'Volvo' || make == 'Jaguar' || make == 'Aston Martin' || make == 'Bentley' || make == 'Ferrari'
      @risk = 60
     elsif
-      make == 'Opel' || make == 'Honda' || make == 'Nissa'
+      make == 'Alfa Romeo' || make == 'Jeep' || make == 'Mercedes Benz' || make == 'Subaru' || make == 'Land Rover' || make == 'Toyota' || make == 'Chevrolet'
       @risk = 40
+    elsif
+      make == 'Volkswagen' || make == 'Acura' || make == 'Peugeot' || make == 'Honda' || make == 'Hyundai'
+     @risk = 20
+     elsif 
+      make == 'Opel' || make == 'Renault' || make == 'Nissa' || make == 'Ford' || make == 'Saab'
+      @risk = 15
     else
-      @risk = 20
+      @risk = 10
     end
     @risk
   end
     
   def car_old
-    if year <= 5.years.ago
-      @tear = 0.30
-    elsif
-      year <= 10.years.ago
-      @tear = 0.50
-    elsif
-      year <= 20.years.ago
-      @tear = 0.80
+    @tear = Date.today.year - year.to_date.year
+    if @tear <= 5
+      @v = 0.3
+    elsif @tear <= 10
+      @v = 0.8
+    elsif @tear <= 20
+      @v = 1.5
     else
-      @tear = 1.50
+      @v = 2
     end
-    @tear
+    @v
   end
+    
   
   def car_engine
     if enginesize <= 1.0
@@ -93,17 +99,32 @@ class Vehicle < ActiveRecord::Base
   end
   
   def check_price
-    if price <= 5000
-      @theprice = price / 100 * 10
+    if price <= 1000
+      @theprice = price / 170
+    elsif
+      price <= 4000
+      @theprice = price / 150
     elsif
       price <= 10000
-      @theprice = price / 100 * 25
+      @theprice = price / 130
     elsif
-      price <= 20000
-      @theprice = price / 100 * 40
+      price <= 10000
+      @theprice = price / 100 
+    elsif
+      price <= 30000
+      @theprice = price / 80 
     elsif
       price <= 50000
-      @theprice = price / 100 * 60
+      @theprice = price / 60
+      elsif
+      price <= 100000
+      @theprice = price / 55
+      elsif
+      price <= 1000000
+      @theprice = price / 60
+      elsif
+      price <= 5000000
+      @theprice = price / 6
     else
       @theprice = price / 100 * 90
     end
@@ -116,9 +137,9 @@ class Vehicle < ActiveRecord::Base
     @prem 
   end
   
-  def risk_premium
+  #def risk_premium
     #@risk = cal_premium(@vehicle) * cal_person_risk(@user) / 100
     #@risk
-  end
+  #end
 
 end

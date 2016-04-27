@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  make: MyString
+  model: MyString
+  min_price: 9.99
+  max_price: 9.99
+  min_year: 2016-04-26
+  max_year: 2016-04-26
+  transmission: MyString
+  bodytype: MyString
+  fueltype: MyString
+
+two:
+  make: MyString
+  model: MyString
+  min_price: 9.99
+  max_price: 9.99
+  min_year: 2016-04-26
+  max_year: 2016-04-26
+  transmission: MyString
+  bodytype: MyString
+  fueltype: MyString

@@ -6,10 +6,13 @@
         <% if user_signed_in? and @vehicle.user == current_user %>
           <%= link_to 'Edit this vehicle', edit_vehicle_path(@vehicle) %>
         <% end %>
-        <h4>Seller :&nbsp<%= @vehicle.user.firstname %> &nbsp&nbsp&nbsp 
-        Price <span class="label label-info"> <%= @vehicle.price %></span></h4>
-       
-        <div class="main-image-to-change" style="background-image:url(<%=@vehicle.image.url %>); height:300px; width:100%;"></div>
+        <h3>Seller :&nbsp<%= @vehicle.user.user_name %> &nbsp&nbsp&nbsp 
+        Price <span class="label label-info"> <%= @vehicle.price %></span></h3>
+       <%= @vehicle.car_old %>
+              <%= @vehicle.check_price %>
+
+        <div class="main-image-to-change" style="background-image:url(<%=@vehicle.image.url %>); 
+        height:300px; width:100%;"></div>
           <div class="col-sm-12">
           <% for asset in @vehicle.assets %>
           <div class="col-sm-3">
@@ -44,7 +47,7 @@
                 </tr>
                 <tr>
                   <td><small>ENGINE SIZE:</small></td>
-                  <td><b><%= @vehicle.enginesize %></b>litre</td>
+                  <td><b><%= @vehicle.enginesize %></b> Litre</td>
                   <td><small>CUPIC CAPACITY:</small></td>
                   <td><b><%= @vehicle.cupiccapacity %></b></td>
                 </tr>
@@ -71,19 +74,22 @@
             <hr/>
             <h4><strong>DESCRIPTION:</strong></h4>
             <h3><%= simple_format(@vehicle.description) %></h3>
+            
+            <%= link_to "Premium", payment_path, class: "btn btn-danger" %>
+          
+          <%= link_to "comments", "#", id: "comments-link" %>
 
-          <%= link_to "Premium", payment_path, class: "btn btn-danger" %>
+          <%= link_to image_tag "medium/mapiMage.png", size: "10x20" %>
           </div>
       </div>
       
       <div class="col-sm-6 pull-right center">
-        
-          
         <% if @posts.blank? %>
           <h3>No Comment just yet, Would you like to add the first Post</h3>
           <%= link_to "Post Comment", new_vehicle_post_path(@vehicle), class: "btn btn-danger" %>
         <% else %>
           <%@posts.each do |post| %>
+          <%= link_to "comments", "#", id: "posts-link" %>
           <div class="row">
             <div class="col-md-3 ">
               <section class="gravatar-panel">

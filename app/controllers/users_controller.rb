@@ -11,4 +11,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
+  #def full_address 
+    #@user = User.find(params[:address])
+    #Geocode.search("@user")
+  #end
 end

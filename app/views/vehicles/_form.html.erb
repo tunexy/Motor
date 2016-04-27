@@ -1,7 +1,3 @@
-<p>
-  <h3>Advertise Your Vehicle</h3>
-  <hr/>
-</p>
 <%= form_for @vehicle, html: { multipart: true, method: :put, class: 'form-horizontal'  } do |f| %>
   <% if @vehicle.errors.any? %>
     <div id="error_explanation">
@@ -17,41 +13,41 @@
   
   <div class="form-group">
     <%= f.label :image, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-4">
+    <div class="col-sm-2">
       <%= f.file_field :image %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :make, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "Make*:", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.select :make, ['Acura', 'Alfa Romeo', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 
             'Cadillac', ' Chevrolet', 'Citroen', 'Dodge', 'Ferrari', 'Fiat', 'Ford', 'General Motors',
             'Honda', 'Hyundai', 'Jaguar', 'Jeep', 'Kia', 'Land Rover', 'Lexus', 'Mazda', 'Mercedes Benz',
-            'Mini', 'Mitsubishi', 'Nissan', 'Peugeot', 'Renault', 'Saab', 'Subaru', 'Suzuki', 'Toyota',
+            'Mini', 'Mitsubishi', 'Nissan', 'Opel', 'Peugeot', 'Renault', 'Saab', 'Subaru', 'Suzuki', 'Toyota',
             'Volkswagen', 'Volvo'], class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :model, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "Model *:", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.text_field :model, class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :year, class: 'col-sm-2 control-label'  %>
+    <%= f.label "Car Year *:", class: 'col-sm-2 control-label'  %>
     <div class="col-sm-2">
-      <%= f.date_select :year, :start_year => 1970, 
+      <%= f.date_select :year, :start_year => 1950, 
           :end_year => Date.current.year, :discard_month => true, 
           :discard_day => true, :include_blank => true, class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :enginesize, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "Engine Size :", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.select :enginesize, ['1.0','1.2','1.4','1.6','1.8',
             '2.0','2.2','2.4','2.6','2.8','3.0','3.2','3.4','3.6','3.8',
             '4.0','4.2','4.4','4.6','4.8','5.0','5.2','5.4','5.6','5.8',
@@ -60,50 +56,50 @@
   </div>
   
   <div class="form-group">
-    <%= f.label :cupiccapacity, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "Cupic Capacity :", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.select :cupiccapacity, ['2','4','5','8','9','12','20'], class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :price, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "Price *:", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.text_field :price, class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :bodytype, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "Body Type :", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.select :bodytype, ['Sedan','Coupe','Convertible','Minivan','Truck','SUV',
       'Collector','Ecofriendly','Pickup','Wagon','Hatchback','Van','Offroad'], class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :fueltype, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
-      <%= f.select :fueltype, ['Petrol','Diesel','Hybrid'], class: 'form-control'  %>
+    <%= f.label "Fuel Type :", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
+      <%= f.select :fueltype, ['Petrol','Diesel','Electric','Hybrid'], class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :milleage, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "Milleage :", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.number_field :milleage, class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :transmission, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "Transmission :", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.select :transmission, ['Manual','Automatic'], class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :taxdue, class: 'col-sm-2 control-label' %>
+    <%= f.label "Tax Due Date :", class: 'col-sm-2 control-label' %>
     <div class="col-sm-2">
       <%= f.date_select :taxdue, :start_year => 2013, :end_year => 2020,
             :discard_day => true, :include_blank => true, class: 'form-control' %>
@@ -111,7 +107,7 @@
   </div>
   
   <div class="form-group">
-    <%= f.label :nctdue, class: 'col-sm-2 control-label'  %>
+    <%= f.label "Nct Due Date ", class: 'col-sm-2 control-label'  %>
     <div class="col-sm-2">
       <%= f.date_select :nctdue, :start_year => 2012, :end_year => 2018, 
           :discard_day => true, :include_blank => true, class: 'form-control' %>
@@ -119,15 +115,15 @@
   </div>
   
   <div class="form-group">
-    <%= f.label :platenumber, class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-6">
+    <%= f.label "* Platenumber :", class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">
       <%= f.text_field :platenumber, class: 'form-control'  %>
     </div>
   </div>
   
   <div class="form-group">
-    <%= f.label :description, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
+    <%= f.label "Description :", class: 'col-sm-2 control-label'  %>
+      <div class="col-sm-2">
       <%= f.text_area :description, rows: 5, class: 'form-control'  %>
     </div>
   </div>

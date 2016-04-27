@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
          
   has_many :vehicles
   has_many :likes
-  has_many :posts, dependent: :delete_all
-  
+  belongs_to :insurance_detail
   has_many :posts, dependent: :destroy
+  
   has_many :sent_invites, class_name: "Relationship", foreign_key: :inviting_id
   has_many :received_invites, class_name: "Relationship", foreign_key: :invited_id
   
@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { large: "700x600>", medium: "300x300>", thumb: "100x100#" }, 
   default_url: "/images/:style/download.jpeg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  
+  geocoded_by :address 
+  after_validation :geocoder, :if => :address_changed?
   
 # validates :username, :firstname, :lastname, :dateofbirth, :martialstatus,
 #   :phonenumber, :address, :city, presence: true
@@ -45,49 +48,50 @@ class User < ActiveRecord::Base
   end
   
   def employed
-    employmentstatus.blank? ? 20 : 4
+    employmentstatus.blank? ? 7 : 3
   end
   
   def family_status
     if martialstatus == 'Single'
-      @family = 30
+      @family = 4
     elsif
       martialstatus == 'Married'
-      @family = 10
+      @family = 1.2
     elsif
       martialstatus == 'Divorced'
-      @family = 18
+      @family = 1.8
     else
-      @family = 15
+      @family = 1.5
     end
     @family
   end
   
   def user_age
-    if dateofbirth && Date.today < 25.years.ago
-      @mature = 60
-    elsif
-      dateofbirth && Date.today < 33.years.ago
-      @mature = 20
-    elsif
-      dateofbirth && Date.today < 49.years.ago
-      @mature = 15
+    
+    @var = Date.today.year - dateofbirth.to_date.year
+    puts @var
+    if @var <= 25
+      @v = 5
+    elsif @var <= 35
+      @v = 2
+    elsif @var <= 45
+      @v = 1.8
+    elsif @var <= 55
+      @v = 1.5
     else
-      @mature = 5
+      @v = 1.2
     end
-    @mature
+      @v
   end
   
   def user_sex
-    is_female.blank? ? 30 : 10
+    is_female.blank? ? 5 : 2
   end
   
   def cal_person_risk(user)
-    #@user = User.find(current_user.id)
     @user = user
     @user_risk = @user.user_age * @user.user_sex * @user.family_status
     @user_risk
   end
-  
   
 end

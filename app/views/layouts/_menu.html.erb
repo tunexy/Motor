@@ -1,19 +1,20 @@
 <nav id="nav">
   <div id="page_nav">
-    <li><%= link_to " Home ", root_path %>
+    <%= link_to " Home ", root_path %>
     <%= link_to " FAQs ", page_faqs_path %>
     <%= link_to " Contact Us ", page_contact_path %>
   </div>
 
   <div id="sign_in">
       <% if user_signed_in? %>
+      <%= link_to "Info ", new_insurance_detail_path %>
         <%= link_to " Profile ", edit_user_registration_path %>
-        <%= link_to " Vehicle ", vehicles_path %>
+        <%= link_to " Vehicles ", vehicles_path %>
         <%= link_to " Advert ", new_vehicle_path %>
-        <%= link_to "Following", relationships_path %>
+        <%= link_to " Following ", relationships_path %>
         <%= link_to "Members", users_path %>
-        <%= link_to " Logout ", destroy_user_session_path, method: :delete %></li>
-        <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
+        <%= link_to " Logout ", destroy_user_session_path, method: :delete %>
+        <div class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></div>
         
       <% else %>
         </li><%= link_to " Sign In ", new_user_session_path %></li>

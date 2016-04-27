@@ -1,0 +1,65 @@
+<h1> Advanced Search</h1>
+
+<%= form_for @search, html: { class: 'form-horizontal' } do |f| %>
+
+  <div class="form-group">
+    <%= f.label :make, class: 'col-sm-1 control-label' %>
+    <div class="col-sm-2">
+      <%= f.text_field :make, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :model, class: 'col-sm-1 control-label'   %>
+    <div class="col-sm-2">
+      <%= f.text_field :model, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :min_price, "Price Range", class: 'col-sm-1 control-label'   %>
+    <div class="col-sm-1">
+      <%= f.text_field :min_price, size: 10, class: 'form-control'  %>
+      <%= f.text_field :max_price, size: 10, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :min_year, "Year Range", class: 'col-sm-1 control-label'   %>
+    <div class="col-sm-2">
+      <%= f.date_select :min_year, :start_year => 1960, :end_year => Date.current.year, :discard_month => true, 
+          :discard_day => true, :include_blank => true, class: 'form-control'  %>
+      <%= f.date_select :max_year, :start_year => 1970, :end_year => Date.current.year, :discard_month => true, 
+          :discard_day => true, :include_blank => true, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :fueltype, class: 'col-sm-1 control-label'   %>
+    <div class="col-sm-2">
+      <%= f.text_field :fueltype, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :bodytype, class: 'col-sm-1 control-label'   %>
+    <div class="col-sm-2">
+      <%= f.text_field :bodytype, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :transmission, class: 'col-sm-1 control-label'   %>
+    <div class="col-sm-2">
+      <%= f.text_field :transmission, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-2">
+      <%= f.submit "Search", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<p><%= link_to 'Back', vehicles_path %> </p>

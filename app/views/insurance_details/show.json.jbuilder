@@ -1,0 +1,1 @@
+json.extract! @insurance_detail, :id, :licensenumber, :licenseheld, :penaltypoint, :dateofpenalty, :freeclaim, :recentclaim, :claimdate, :yearsdriving, :packing, :homeowner, :kmperyear, :user_id, :created_at, :updated_at

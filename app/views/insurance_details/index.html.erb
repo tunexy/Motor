@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Insurance Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Licensenumber</th>
+      <th>Licenseheld</th>
+      <th>Penaltypoint</th>
+      <th>Dateofpenalty</th>
+      <th>Freeclaim</th>
+      <th>Recentclaim</th>
+      <th>Claimdate</th>
+      <th>Yearsdriving</th>
+      <th>Packing</th>
+      <th>Homeowner</th>
+      <th>Kmperyear</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @insurance_details.each do |insurance_detail| %>
+      <tr>
+        <td><%= insurance_detail.licensenumber %></td>
+        <td><%= insurance_detail.licenseheld %></td>
+        <td><%= insurance_detail.penaltypoint %></td>
+        <td><%= insurance_detail.dateofpenalty %></td>
+        <td><%= insurance_detail.freeclaim %></td>
+        <td><%= insurance_detail.recentclaim %></td>
+        <td><%= insurance_detail.claimdate %></td>
+        <td><%= insurance_detail.yearsdriving %></td>
+        <td><%= insurance_detail.packing %></td>
+        <td><%= insurance_detail.homeowner %></td>
+        <td><%= insurance_detail.kmperyear %></td>
+        <td><%= insurance_detail.user_id %></td>
+        <td><%= link_to 'Show', insurance_detail %></td>
+        <td><%= link_to 'Edit', edit_insurance_detail_path(insurance_detail) %></td>
+        <td><%= link_to 'Destroy', insurance_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Insurance detail', new_insurance_detail_path %>

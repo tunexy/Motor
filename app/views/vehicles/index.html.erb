@@ -1,10 +1,16 @@
-
 <%= will_paginate @vehicle_paginator %>
 
+<p><%= link_to "Advance Search", new_search_path, class: "btn btn-danger"%></p>
 <% @vehicles.each do |vehicle| %>
   <div class="row">
     <div class="col-xs-6 col-md-4 ">
       <div class="thumbnail">
+               <%= vehicle.car_old %>
+               <%= vehicle.car_engine %>
+               <%= vehicle.make_level %>
+              <%= vehicle.check_price %>
+
+
         <h4>Seller:<%= vehicle.user.firstname %> &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp Price <span class="label label-info"> <%= vehicle.price %></span></h4>
         <%= image_tag vehicle.image.url(:medium), size: "250x300" %>
         
@@ -13,7 +19,7 @@
           <h4>Key Info : <small><%= vehicle.make %> > <%= vehicle.model %></small></h4>
           <h4>Year : <small><%= vehicle.year.year %></small></h4>
           <p>
-            <a href="#" class="btn btn-warning" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a>
+            <a href="#" class="btn btn-default" role="button">Button</a>
           </p>
           <p>
             <span class='quiet'><small> created: <%= time_ago_in_words(vehicle.created_at)%> ago, </small></span>
@@ -27,9 +33,7 @@
             <%= link_to like_vehicle_path(vehicle, like: false), method: :post do %>
               <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= vehicle.thumbs_down_total %>
             <% end %>
-            <%= link_to 'Show', vehicle %>
-            <%= link_to 'Edit', edit_vehicle_path(vehicle) %>
-            <%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %>
+            
           </div>
         </div>
       </div>
@@ -46,7 +50,4 @@
   </div>
 <% end %>
 <hr/>
-
-<%= link_to 'New Vehicle', new_vehicle_path %>
-
 <%= will_paginate %>

@@ -112,7 +112,7 @@ Devise.setup do |config|
   # the user cannot access the website without confirming their account.
   
   
-  config.allow_unconfirmed_access_for = 0.days
+  config.allow_unconfirmed_access_for = 100.days
 
 
   # A period that the user is allowed to confirm their account before their
