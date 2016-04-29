@@ -1,30 +1,23 @@
 class InsuranceDetailsController < ApplicationController
   before_action :set_insurance_detail, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
-  # GET /insurance_details
-  # GET /insurance_details.json
   def index
     @insurance_details = InsuranceDetail.all
   end
 
-  # GET /insurance_details/1
-  # GET /insurance_details/1.json
   def show
   end
 
-  # GET /insurance_details/new
   def new
-    @insurance_detail = InsuranceDetail.new
+    @insurance_detail = current_user.build_insurance_detail
   end
-
-  # GET /insurance_details/1/edit
+  
   def edit
   end
 
-  # POST /insurance_details
-  # POST /insurance_details.json
   def create
-    @insurance_detail = InsuranceDetail.new(insurance_detail_params)
+    @insurance_detail = current_user.build_insurance_detail(insurance_detail_params)
 
     respond_to do |format|
       if @insurance_detail.save
@@ -37,10 +30,9 @@ class InsuranceDetailsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /insurance_details/1
-  # PATCH/PUT /insurance_details/1.json
   def update
     respond_to do |format|
+      #@insurance_detail = Insurance_detail.find(params[:id])
       if @insurance_detail.update(insurance_detail_params)
         format.html { redirect_to @insurance_detail, notice: 'Insurance detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @insurance_detail }
@@ -51,8 +43,6 @@ class InsuranceDetailsController < ApplicationController
     end
   end
 
-  # DELETE /insurance_details/1
-  # DELETE /insurance_details/1.json
   def destroy
     @insurance_detail.destroy
     respond_to do |format|

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  resources :insurance_details
   root to: 'page#home'
 
   get 'page/about'
@@ -14,6 +13,9 @@ Rails.application.routes.draw do
   resources :payments, only: [:show]
 
   resources :searches
+  
+  resources :insurance_details
+
   
   resources :vehicles do
     resources :posts, except: [:show, :index]

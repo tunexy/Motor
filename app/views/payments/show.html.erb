@@ -1,3 +1,31 @@
-<p> Premium is calculated here </p>
+<div class="row">
+  <div class="col-xs-3">
+    <div class="default panel-default">
+      <div class="panel-body">
 
- <%= @premium %>
+        <h4> Fully Comprehensive Premium  </h4>
+        <p>Monthly charges</p><%= @premium.round(2) %>
+        
+        <h4> Deposit </h3>
+        <%= @install %> 
+        
+        <h4> Fully Comprehensive Premium  </h4>
+        <%= @fully.round(2) %>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="col-xs-6">
+    <div class="default panel-default">
+      <div class="panel-body">
+
+       <p><%= current_user.firstname %></p>
+       <p><%= current_user.phonenumber %></p>
+       <p><%= current_user.address %></p>
+       <p><%= current_user.employmentstatus %></p>
+        
+      </div>
+    </div>
+  </div>
+  

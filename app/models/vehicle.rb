@@ -40,18 +40,18 @@ class Vehicle < ActiveRecord::Base
   
   def make_level
     if make == 'Audi' || make == 'BMW' || make == 'Cadillac' || make == 'Volvo' || make == 'Jaguar' || make == 'Aston Martin' || make == 'Bentley' || make == 'Ferrari'
-     @risk = 60
+     @risk = 10
     elsif
       make == 'Alfa Romeo' || make == 'Jeep' || make == 'Mercedes Benz' || make == 'Subaru' || make == 'Land Rover' || make == 'Toyota' || make == 'Chevrolet'
-      @risk = 40
+      @risk = 7
     elsif
       make == 'Volkswagen' || make == 'Acura' || make == 'Peugeot' || make == 'Honda' || make == 'Hyundai'
-     @risk = 20
+     @risk = 5
      elsif 
       make == 'Opel' || make == 'Renault' || make == 'Nissa' || make == 'Ford' || make == 'Saab'
-      @risk = 15
+      @risk = 2.5
     else
-      @risk = 10
+      @risk = 3
     end
     @risk
   end
@@ -59,11 +59,11 @@ class Vehicle < ActiveRecord::Base
   def car_old
     @tear = Date.today.year - year.to_date.year
     if @tear <= 5
-      @v = 0.3
+      @v = 1.3
     elsif @tear <= 10
-      @v = 0.8
+      @v = 1.8
     elsif @tear <= 20
-      @v = 1.5
+      @v = 4
     else
       @v = 2
     end
@@ -73,73 +73,68 @@ class Vehicle < ActiveRecord::Base
   
   def car_engine
     if enginesize <= 1.0
-      @wear = 4
+      @wear = 1.3
     elsif
       enginesize <= 1.4
-      @wear = 6
+      @wear = 1.6
     elsif
       enginesize <= 1.8
-      @wear = 8
+      @wear = 1.8
     elsif
       enginesize <= 2.4
-      @wear = 10
+      @wear = 2
     elsif
       enginesize <= 2.8
-      @wear = 12
+      @wear = 2.4
     elsif
       enginesize <= 3.2
-      @wear = 15
+      @wear = 3.2
     elsif
       enginesize <= 4.0
-      @wear = 18
+      @wear = 5
     else
-      @wear = 20
+      @wear = 9
     end
     @wear
   end
   
   def check_price
     if price <= 1000
-      @theprice = price / 170
+      @theprice = price / 70
     elsif
-      price <= 4000
-      @theprice = price / 150
-    elsif
-      price <= 10000
-      @theprice = price / 130
+      price <= 5000
+      @theprice = price / 90
     elsif
       price <= 10000
-      @theprice = price / 100 
+      @theprice = price / 110
+    elsif
+      price <= 20000
+      @theprice = price / 130 
     elsif
       price <= 30000
-      @theprice = price / 80 
+      @theprice = price / 150 
     elsif
       price <= 50000
-      @theprice = price / 60
+      @theprice = price / 180
       elsif
       price <= 100000
-      @theprice = price / 55
+      @theprice = price / 200
       elsif
       price <= 1000000
-      @theprice = price / 60
+      @theprice = price / 500
       elsif
       price <= 5000000
-      @theprice = price / 6
+      @theprice = price / 1000
     else
-      @theprice = price / 100 * 90
+      @theprice = price / 100 
     end
     @theprice
   end
   
   def cal_premium(vehicle)
-    @vehicle=vehicle
+    @vehicle = vehicle
     @prem = @vehicle.make_level * @vehicle.car_old * @vehicle.car_engine * @vehicle.check_price / 100
     @prem 
   end
-  
-  #def risk_premium
-    #@risk = cal_premium(@vehicle) * cal_person_risk(@user) / 100
-    #@risk
-  #end
 
 end

@@ -5,11 +5,6 @@
   <div class="row">
     <div class="col-xs-6 col-md-4 ">
       <div class="thumbnail">
-               <%= vehicle.car_old %>
-               <%= vehicle.car_engine %>
-               <%= vehicle.make_level %>
-              <%= vehicle.check_price %>
-
 
         <h4>Seller:<%= vehicle.user.firstname %> &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp Price <span class="label label-info"> <%= vehicle.price %></span></h4>
         <%= image_tag vehicle.image.url(:medium), size: "250x300" %>
@@ -42,11 +37,16 @@
 <% end %>
 
 <% if !user_signed_in? %>
+<div class="container">
+
+</div>
+
   <div class="jumbotron">
     <h1>Listing Vehicles</h1>
     <h1>Your Favorite Cars Posts</h1>
     <p>This is some note to see if bootstrap works</p>
     <p><%= link_to "Sign Up to Post A Comment", new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
+  </div>
   </div>
 <% end %>
 <hr/>

@@ -6,9 +6,8 @@ class User < ActiveRecord::Base
          
   has_many :vehicles
   has_many :likes
-  belongs_to :insurance_detail
   has_many :posts, dependent: :destroy
-  
+  has_one :insurance_detail
   has_many :sent_invites, class_name: "Relationship", foreign_key: :inviting_id
   has_many :received_invites, class_name: "Relationship", foreign_key: :invited_id
   
@@ -17,38 +16,36 @@ class User < ActiveRecord::Base
   
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  #validates :email, presence: true, length: { maximum: 105 },
-                                    #uniqueness: { case_sensitive: false },
-                                    #format: { with: VALID_EMAIL_REGEX }
+  validates :email, presence: true, length: { maximum: 105 },
+                                    uniqueness: { case_sensitive: false },
+                                    format: { with: VALID_EMAIL_REGEX }
                                     
   has_attached_file :avatar, styles: { large: "700x600>", medium: "300x300>", thumb: "100x100#" }, 
-  default_url: "/images/:style/download.jpeg"
+  default_url: "/images/medium/download.jpeg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   
   geocoded_by :address 
   after_validation :geocoder, :if => :address_changed?
+  validates :username, :firstname, :lastname, :dateofbirth, :martialstatus,
+  :phonenumber, :address, :city, presence: true
+  validates :username, uniqueness: true, length: { in: 3..20}
   
-# validates :username, :firstname, :lastname, :dateofbirth, :martialstatus,
-#   :phonenumber, :address, :city, presence: true
-  
-#  validates :username, uniqueness: true, length: { in: 3..20}
-  
-#  validates :firstname, :lastname, 
-#    length: { in: 2..20, too_long: "%{count} characters is the maximum allowed" }
+  validates :firstname, :lastname, 
+    length: { in: 2..20, too_long: "%{count} characters is the maximum allowed" }
     
-#  validate do
-#    if dateofbirth && dateofbirth < Date.today
-#    else
-#      errors[:dateofbirth] << "Date Of Birth  Can not be a date in the future"
-#    end
-#  end
+  validate do
+     if dateofbirth && dateofbirth < Date.today
+    else
+       errors[:dateofbirth] << "Date Of Birth  Can not be a date in the future"
+     end
+  end
   
   def user_name
     username.blank? ? email : username
   end
   
   def employed
-    employmentstatus.blank? ? 7 : 3
+    employmentstatus.blank? ? 5 : 2
   end
   
   def family_status
@@ -67,19 +64,17 @@ class User < ActiveRecord::Base
   end
   
   def user_age
-    
     @var = Date.today.year - dateofbirth.to_date.year
-    puts @var
-    if @var <= 25
-      @v = 5
+    if @var < 24
+      @v = 6
     elsif @var <= 35
       @v = 2
     elsif @var <= 45
-      @v = 1.8
+      @v = 1.6
     elsif @var <= 55
-      @v = 1.5
-    else
       @v = 1.2
+    else
+      @v = 1.5
     end
       @v
   end

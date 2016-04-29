@@ -23,6 +23,6 @@ class ApplicationController < ActionController::Base
             
             devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :avatar, :email, 
             :password, :current_password, :firstname, :lastname, :martialstatus, :employmentstatus, 
-            :phonenumber, :address, :city, :is_female, :dateofbirth, :longitude, :latitude) }
+            :phonenumber, :address, :city, :is_female, :dateofbirth, :latitude, :longitude) }
     end
 end

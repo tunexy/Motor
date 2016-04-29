@@ -4,6 +4,7 @@
     <h1><%= @user.user_name %></h1>
     
     <% if current_user %>
+      <%= link_to 'Edit this profile', edit_user_registration_path(@user) %>
       <% @relationship = current_user.sent_invites.where(invited_id: @user.id).first %>
 
       <% if @relationship %>
@@ -28,8 +29,7 @@
       <%= content_tag(:li, ("Martial Status : " + @user.martialstatus)) unless @user.martialstatus.blank? %>
       <%= content_tag(:li, ("Address : " + @user.address)) unless @user.address.blank? %>
       <%= content_tag(:li, ("City : " + @user.city)) unless @user.city.blank? %>
-      <h3><%= @user.cal_person_risk(@user) %></h3>
-      <h3><%= @user.user_age %></h3>
+
 
     </ul>
   </div>
