@@ -2,7 +2,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="row">
-      <div class="col-sm-5">
+      <div class="col-sm-5›">
         <% if user_signed_in? and @vehicle.user == current_user %>
           <%= link_to 'Edit this vehicle', edit_vehicle_path(@vehicle) %>
           <%= link_to 'Destroy this ad once it sold', @vehicle, method: :delete, data: { confirm: 'Are you sure?' } %>

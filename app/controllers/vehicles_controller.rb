@@ -1,5 +1,6 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: [:show, :edit, :update, :destroy, :like, :image_url]
+  before_action :set_vehicle, only: [:edit, :update, :destroy, :like, :image_url] 
+  before_action :require_same_user, only: [:edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -8,7 +9,6 @@ class VehiclesController < ApplicationController
 
   def show
     @posts = Post.where(vehicle_id: @vehicle.id).order("created_at DESC")
-    @vehicle = Vehicle.find(params[:id])
   end
 
   def new
@@ -19,14 +19,11 @@ class VehiclesController < ApplicationController
   def edit
     10.times {@vehicle.assets.build}
   end
-  
-  def image_url
-    Image.find( self.image ).url
-    Asset.find(self.default_image_id).image.url
-  end
 
   def create
     @vehicle = current_user.vehicles.build(vehicle_params)
+    @vehicle.user = current_user
+    
     respond_to do |format|
       if @vehicle.save
         format.html { redirect_to @vehicle,
@@ -79,4 +76,12 @@ class VehiclesController < ApplicationController
     def vehicle_params
       params.require(:vehicle).permit(:image, :description, :make, :model, :year, :enginesize, :cupiccapacity, :price, :bodytype, :fueltype, :milleage, :transmission, :taxdue, :nctdue, :platenumber, :user_id, assets_attributes: [:id, :image])
     end
+    
+    def require_same_user
+      if current_user != @vehicle.user
+        flash[:danger] = "Your not the same user"
+        redirect_to :back
+      end
+    end
+    
 end

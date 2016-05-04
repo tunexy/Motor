@@ -24,21 +24,21 @@ class User < ActiveRecord::Base
   default_url: "/images/medium/download.jpeg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   
-  geocoded_by :address 
-  after_validation :geocoder, :if => :address_changed?
-  validates :username, :firstname, :lastname, :dateofbirth, :martialstatus,
-  :phonenumber, :address, :city, presence: true
-  validates :username, uniqueness: true, length: { in: 3..20}
+  #geocoded_by :address 
+#after_validation :geocoder, :if => :address_changed?
+  #validates :username, :firstname, :lastname, :dateofbirth, :martialstatus,
+  #:phonenumber, :address, :city, presence: true
+  #validates :username, uniqueness: true, length: { in: 3..20}
   
-  validates :firstname, :lastname, 
-    length: { in: 2..20, too_long: "%{count} characters is the maximum allowed" }
+  #validates :firstname, :lastname, 
+  #  length: { in: 2..20, too_long: "%{count} characters is the maximum allowed" }
     
-  validate do
-     if dateofbirth && dateofbirth < Date.today
-    else
-       errors[:dateofbirth] << "Date Of Birth  Can not be a date in the future"
-     end
-  end
+  #validate do
+   #  if dateofbirth && dateofbirth < Date.today
+   # else
+   #    errors[:dateofbirth] << "Date Of Birth  Can not be a date in the future"
+   #  end
+  #end
   
   def user_name
     username.blank? ? email : username

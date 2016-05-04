@@ -8,25 +8,22 @@ Rails.application.routes.draw do
 
   get 'page/contact'
   
-  resources :relationships, only: [:create, :destroy, :index]
-
-  resources :payments, only: [:show]
-
-  resources :searches
-  
-  resources :insurance_details
-
-  
-  resources :vehicles do
-    resources :posts, except: [:show, :index]
-    member do
-      post 'like'
-    end
-  end
-
   devise_for :users
     resources :users, only: [:index, :show]
     
+  resources :vehicles do
+    resources :posts, except: [:show, :index]
+      member do
+        post 'like'
+      end
+    end
+    
+  resources :payments, only: [:show]
+  resources :insurance_details
+
+  resources :relationships, only: [:create, :destroy, :index]
+
+  resources :searches
 end
   #controllers: { registrations: "registrations" }
   
