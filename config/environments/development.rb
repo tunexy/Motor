@@ -47,15 +47,14 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default :charset => "utf-8"
   
-  host = 'rails-tutorial-tunexy.c9users.io'
-  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default_url_options = { :host => 'http://rails-tutorial-tunexy.c9.io' }
 
   
   #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: "smtp.gmail.com",
+      address: 'smtp.mailgun.org',
       port: 587,
       domain: 'rails-tutorial-tunexy.c9users.io',
       authentication: "plain",

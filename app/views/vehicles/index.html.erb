@@ -33,13 +33,10 @@
         </div>
       </div>
     </div>
-  </div>
+  
 <% end %>
 
 <% if !user_signed_in? %>
-<div class="container">
-
-</div>
 
   <div class="jumbotron">
     <h1>Listing Vehicles</h1>
@@ -49,5 +46,6 @@
   </div>
   </div>
 <% end %>
+</div>
 <hr/>
 <%= will_paginate %>

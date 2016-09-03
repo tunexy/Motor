@@ -8,12 +8,14 @@ ruby '2.2.1'
 # gem 'puma'
 gem 'geocoder'
 gem 'devise'
+gem 'mailboxer', github: 'mailboxer/mailboxer'
 gem 'will_paginate', '~>3.0.7'
 gem 'bootstrap-will_paginate', '~>0.0.10'
 gem 'pry'
 gem 'pry-doc'
 gem 'pry-remote'
 gem 'pry-stack_explorer'
+gem 'rack-mini-profiler'
 #gem 'pry-debugger'
 gem 'pry-rails', :group => :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -64,8 +66,9 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 

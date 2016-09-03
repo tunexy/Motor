@@ -1,5 +1,5 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: [:edit, :update, :destroy, :like, :image_url] 
+  before_action :set_vehicle, only: [:show, :edit, :update, :destroy, :like, :image_url] 
   before_action :require_same_user, only: [:edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -9,6 +9,7 @@ class VehiclesController < ApplicationController
 
   def show
     @posts = Post.where(vehicle_id: @vehicle.id).order("created_at DESC")
+    @vehicle = Vehicle.find(params[:id])
   end
 
   def new

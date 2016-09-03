@@ -18,7 +18,8 @@ class InsuranceDetailsController < ApplicationController
 
   def create
     @insurance_detail = current_user.build_insurance_detail(insurance_detail_params)
-
+    @insurance_detail = current_user
+    
     respond_to do |format|
       if @insurance_detail.save
         format.html { redirect_to @insurance_detail, notice: 'Insurance detail was successfully created.' }

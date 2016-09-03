@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/mailboxer/mailboxer.git
+  revision: 0e41d6a4aa02eb6e74300e3a985a5c3c18a3c297
+  specs:
+    mailboxer (0.14.0)
+      carrierwave (>= 0.5.8)
+      rails (>= 4.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,6 +55,10 @@ GEM
     aws-sdk-resources (2.2.17)
       aws-sdk-core (= 2.2.17)
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.6)
@@ -56,6 +68,12 @@ GEM
       will_paginate
     builder (3.2.2)
     byebug (8.2.1)
+    carrierwave (0.11.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+      mimemagic (>= 0.3.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -129,6 +147,8 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     rack (1.6.4)
+    rack-mini-profiler (0.10.1)
+      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.4)
@@ -209,6 +229,8 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk (>= 2.0.0)
+  better_errors
+  binding_of_caller
   bootstrap-sass (~> 3.3.6)
   bootstrap-will_paginate (~> 0.0.10)
   byebug
@@ -217,6 +239,7 @@ DEPENDENCIES
   geocoder
   jbuilder (~> 2.0)
   jquery-rails
+  mailboxer!
   mysql2 (~> 0.3.20)
   paperclip (~> 4.3)
   pg
@@ -225,6 +248,7 @@ DEPENDENCIES
   pry-rails
   pry-remote
   pry-stack_explorer
+  rack-mini-profiler
   rails (= 4.2.4)
   rails_12factor
   sass-rails (~> 5.0)
