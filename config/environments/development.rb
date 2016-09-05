@@ -1,5 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  # BetterErrors::Middleware.allow_ip! '192.168.0.18'
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -55,12 +56,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address: 'smtp.mailgun.org',
-      port: 587,
+      port: 2525,
       domain: 'rails-tutorial-tunexy.c9users.io',
       authentication: "plain",
       enable_starttls_auto: true,
       user_name: 'tunexy10@gmail.com',
-      password: 'samson10'
+      password: 'samson10',
+      :ssl =>false
 
   }
 

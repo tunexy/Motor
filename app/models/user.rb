@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :vehicles
   has_many :likes
   has_many :posts, dependent: :destroy
-  has_one :insurance_detail
+  has_one :insurance_detail, dependent: :destroy
   has_many :sent_invites, class_name: "Relationship", foreign_key: :inviting_id
   has_many :received_invites, class_name: "Relationship", foreign_key: :invited_id
   
@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   
   #geocoded_by :address 
-#after_validation :geocoder, :if => :address_changed?
+  #after_validation :geocoder, :if => :address_changed?
   #validates :username, :firstname, :lastname, :dateofbirth, :martialstatus,
   #:phonenumber, :address, :city, presence: true
   #validates :username, uniqueness: true, length: { in: 3..20}
@@ -39,6 +39,16 @@ class User < ActiveRecord::Base
    #    errors[:dateofbirth] << "Date Of Birth  Can not be a date in the future"
    #  end
   #end
+  
+  acts_as_messageable
+
+  def mailboxer_username
+   self.username
+  end
+
+  def mailboxer_email(object)
+   self.email
+  end
   
   def user_name
     username.blank? ? email : username
@@ -73,6 +83,8 @@ class User < ActiveRecord::Base
       @v = 1.6
     elsif @var <= 55
       @v = 1.2
+    elsif @var <= 70
+      @v = 1
     else
       @v = 1.5
     end

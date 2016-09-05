@@ -9,6 +9,18 @@ class ApplicationController < ActionController::Base
    # @current_user ||= User.find(session[:user_id]) if session[:user_id]
   #end
   
+  helper_method :mailbox, :conversation
+
+  private
+
+  def mailbox
+    @mailbox ||= current_user.mailbox
+  end
+
+  def conversation
+    @conversation ||= mailbox.conversations.find(params[:id])
+  end
+  
   def logged_in?
     !!current_user
   end

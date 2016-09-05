@@ -4,7 +4,7 @@ class VehiclesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @vehicles = Vehicle.paginate(page: params[:page], per_page: 10)
+    @vehicles = Vehicle.paginate(page: params[:page], per_page: 12)
   end
 
   def show
